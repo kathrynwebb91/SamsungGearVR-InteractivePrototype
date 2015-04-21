@@ -158,6 +158,10 @@ public class MoviePlayerSample : MonoBehaviour
 		AndroidJNI.CallObjectMethod(mediaPlayer.GetRawObject(), setSurfaceMethodId, parms);
 
 		mediaPlayer.Call("setDataSource", "/storage/extSdCard/oculus/360Videos/Avengers VR.mp4");
+		//Link Example
+		//mediaPlayer.Call("setDataSource", "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4");
+		//Streaming example
+		//mediaPlayer.Call("setDataSource", "http://37.46.24.16:8082/vod2/bbb.mp4");
 		mediaPlayer.Call("prepare");
 		mediaPlayer.Call("setLooping", true);
 		mediaPlayer.Call("start");
