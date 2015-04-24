@@ -26,11 +26,11 @@ public class RollOver : MonoBehaviour {
 		if(state.hit)
 		{
 			scaled = true;
-			iTween.ScaleTo(gameObject, 1.5F * state.origScale ,2f);
+			iTween.ScaleTo(gameObject, 1.5F * state.origScale ,0.4f);
 		}else{
 			if(scaled)
 			{
-				iTween.ScaleTo(gameObject, state.origScale ,2f);
+				iTween.ScaleTo(gameObject, state.origScale ,0.4f);
 			}
 		}
 	}

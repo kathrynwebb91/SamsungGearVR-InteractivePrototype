@@ -8,18 +8,24 @@ using strange.extensions.signal.impl;
 [RequireComponent(typeof(ObjectState))]
 public class TargetView : View
 {
-        private ObjectState state;
+        private ObjectState     state;
+        private int             activeChild { get; set; }
 	    private float 			dragPositionMultiplier;
 	    private float			targetDistance;
-		
+
+        void Awake()
+        {
+            state = GetComponentInParent<ObjectState>();
+            if (this.transform.childCount > 0)
+            {
+                //Switchable childstate =  (Switchable) this.transform.GetChild(1);
+            }
+        }
+
 		// Use this for initialization
 		void Start ()
 		{
-			//active = false;
-			//selected = false;
-
-			//haloHighlight = this.GetComponent("Halo");
-			
+            activeChild = 0;
 			//dragPositionMultiplier = 1.5F;
 			//targetDistance = this.transform.position.magnitude; 
 
@@ -27,10 +33,31 @@ public class TargetView : View
 
         public void tapped()
         {
-
-            state.selected = !state.selected;
+            if (state.hit)
+            {
+                state.selected = !state.selected;
+            }
         }
 
+        public void swipedLeft()
+        {
+            state.distance++;
+        }
+
+        public void swipedRight()
+        {
+            state.distance--;
+        }
+
+        public void swipedUp()
+        {
+            state.prefabNum--;
+        }
+
+        public void swipedDown()
+        {
+            state.prefabNum++;
+        }
 
 		// Update is called once per frame
 		void Update ()
@@ -39,30 +66,7 @@ public class TargetView : View
             //state.selected = false;// this might work dependin gon the order of things.
 		}
 
-		/*// Called if item is selected
-		void Select(){
-			//selected = true;
-			ScaleTarget (0.05F);
-			ToggleHalo (true);
-		}
-
-		// Called if item is unselected
-		void Deselect(){
-			//selected = false;
-			ScaleTarget (-0.05F);
-			ToggleHalo (false);
-		}
-
-		void Reset(){
-			//Revert this to usual state
-			//if (active) {
-			//	active = false;
-			//}
-			//if (selected) {
-			//	selected = false;
-			//}
-		}*/
-
+		
 		/***Interaction functions***/
 
 		/*void RotateTarget(string axis, string direction){

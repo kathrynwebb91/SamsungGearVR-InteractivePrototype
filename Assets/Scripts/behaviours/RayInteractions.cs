@@ -28,7 +28,7 @@ public class RayInteractions : MonoBehaviour {
 		RaycastHit rayHit;
 		Ray ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
 		
-		if (Physics.Raycast(ray, out rayHit , 100)) {
+		if (Physics.Raycast(ray, out rayHit ,1000)) {
 			if(rayHit.collider.gameObject == gameObject)
 			{
 				state.hit = true;

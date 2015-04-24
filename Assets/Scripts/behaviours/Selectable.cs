@@ -9,14 +9,18 @@ using System.Collections;
 [RequireComponent (typeof (ObjectState))]
 public class Selectable : MonoBehaviour {
 
+    public OVRCameraRig cameraController;
 
 	private ObjectState state;
     
 	private bool highlighted;
+    private bool firstHit;
 
 	void Awake(){
-		state =  GetComponentInParent<ObjectState>();
+		state =  GetComponent<ObjectState>();
 		highlighted = false;
+        firstHit = true;
+
 	}
 
 	void Start () {
@@ -26,18 +30,43 @@ public class Selectable : MonoBehaviour {
 	void Update () {
 		if(state.selected)
 		{
-            if (!highlighted)
+            /*if (!highlighted)
             {
                 highlighted = true;
                 this.gameObject.AddComponent("Halo");
-            }
+            }*/
+
+                CheckHit();
+
+                Ray ray = new Ray(cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+
+                //GameObject.Find("PhotoSphereExhibition").GetComponent<Collider> ().Raycast (photosphereray, out spherehit, 100.0f);
+                //Vector3 newpoint = spherehit.point - new Vector3(0.1F, 0.1F, 0.1F);
+
+                Vector3 newpoint = ray.origin + (ray.direction * state.distance);
+ 			    this.transform.position = newpoint;
+
+                //this.transform.LookAt(ray.origin);
+
 
 		}else{
-			if(highlighted)
+			/*if(highlighted)
 			{   
                 Destroy(this.gameObject.GetComponent("Halo"));
                 highlighted = false;
-			}
+			}*/
 		}
 	}
+
+    void CheckHit()
+    {
+        Ray ray = new Ray(cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+        RaycastHit hit = new RaycastHit();
+
+        if (this.GetComponent<Collider>().Raycast(ray, out hit, 1000) && firstHit)
+        {
+            state.distance = hit.distance;
+            firstHit = false;
+        }
+    }
 }

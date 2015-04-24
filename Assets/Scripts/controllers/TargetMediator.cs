@@ -11,9 +11,6 @@ namespace Demo {
     {
 
         [Inject]
-        public Signal<string> touchInputViewEvent { get; set; }
-
-        [Inject]
         public TouchpadInputSignal<string> touchInputSignal { get; set; }
 
         [Inject]
@@ -28,9 +25,27 @@ namespace Demo {
         }
 
         protected void InputHandler(String inputType){
-            print("Input handler recieved" + inputType);
+            print("Input handler recieved " + inputType);
 
-            targetView.tapped();
+            switch (inputType)
+            {
+                case "tap":
+                    targetView.tapped();
+                break;
+                case "left":
+                    targetView.swipedLeft();
+                break;
+                case "right":
+                    targetView.swipedRight();
+                break;
+                case "up":
+                    targetView.swipedUp();
+                break;
+                case "down":
+                    targetView.swipedDown();
+                break;
+            }
+            
         }
 	
     }

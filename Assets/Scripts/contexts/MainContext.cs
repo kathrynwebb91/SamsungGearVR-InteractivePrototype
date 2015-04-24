@@ -37,6 +37,8 @@ namespace Demo{
         {
             base.Launch();
             InputManager inputManager = injectionBinder.GetInstance<InputManager>();
+            //TargetView targetView = injectionBinder.GetInstance<TargetView>();
+
         }
 		
 	
