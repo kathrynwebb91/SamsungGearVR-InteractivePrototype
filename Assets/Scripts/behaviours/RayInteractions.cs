@@ -18,7 +18,7 @@ public class RayInteractions : MonoBehaviour {
 
 	void Awake(){
 		hit = false;
-		state =  GetComponentInParent<ObjectState>();
+		state =  GetComponent<ObjectState>();
 	}
 
 	void Start () {
@@ -34,17 +34,21 @@ public class RayInteractions : MonoBehaviour {
 			ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
 		}
 
-		if (Physics.Raycast(ray, out rayHit ,100.0F)) {
+		if (Physics.Raycast(ray, out rayHit ,1000)) {
 			if(rayHit.collider.gameObject == gameObject)
 			{
 				state.hit = true;
-				print ("Hit!");
+				if(state.firstHit){
+					state.distance = rayHit.distance;
+					state.firstHit = false;
+				}
 			}else{
 				state.hit = false;
 			}
-		}else{
-
-
 		}
+	}
+
+	void attachObjectToGaze(){
+		
 	}
 }

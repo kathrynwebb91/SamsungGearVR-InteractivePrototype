@@ -8,18 +8,14 @@ using strange.extensions.signal.impl;
 [RequireComponent(typeof(ObjectState))]
 public class TargetView : View
 {
-        private ObjectState     state;
+        public ObjectState     	state;
         private int             activeChild { get; set; }
 	    private float 			dragPositionMultiplier;
 	    private float			targetDistance;
 
         void Awake()
         {
-            state = GetComponent<ObjectState>();
-            if (this.transform.childCount > 0)
-            {
-                //Switchable childstate =  (Switchable) this.transform.GetChild(1);
-            }
+            state = this.GetComponent<ObjectState>();
         }
 
 		// Use this for initialization
@@ -39,24 +35,57 @@ public class TargetView : View
             }
         }
 
-        public void swipedLeft()
+        public virtual void swipedLeft()
         {
-            state.distance++;
+			if (state.selected) {
+				if (state.rotateable) {
+					state.rotateDirection = "left";
+				} else if(state.switchable) {
+					state.colorNum++;
+				} else{
+					state.distance++;
+				}
+			}
         }
 
-        public void swipedRight()
+		public virtual void swipedRight()
         {
-            state.distance--;
+			if (state.selected) {
+				if (state.rotateable) {
+					state.rotateDirection = "right";
+				} else if(state.switchable) {
+					state.colorNum--;
+				} else{
+					state.distance--;
+				}
+			}
+		}
+
+		public virtual void swipedUp()
+        {
+			if (state.selected) {
+				if (state.rotateable) {
+					state.rotateDirection = "up";
+				} else if(state.switchable) {
+					state.prefabNum--;
+				} else{
+
+				}
+			}
+            
         }
 
-        public void swipedUp()
+		public virtual void swipedDown()
         {
-            state.prefabNum--;
-        }
+			if (state.selected) {
+				if (state.rotateable) {
+						state.rotateDirection = "down";
+				} else if(state.switchable) {
+					state.prefabNum++;
+				} else{
 
-        public void swipedDown()
-        {
-            state.prefabNum++;
+				}
+			}
         }
 
 		// Update is called once per frame
@@ -69,18 +98,8 @@ public class TargetView : View
 		
 		/***Interaction functions***/
 
-		/*void RotateTarget(string axis, string direction){
-			if (direction == "clockwise") {
+	/*
 
-			} else if (direction == "anticlockwise") {
-
-			}
-		}
-
-		void MoveProduct(Vector3 direction){
-			transform.Translate (direction);
-		}
-		
 		//Select helper function. Shows/hides glow effect when item is selected/deselected
 		void ToggleHalo(bool switcher){
 			//Highlight product
@@ -92,13 +111,7 @@ public class TargetView : View
 			}
 		}
 		
-		void ScaleTarget(float amount){
-			iTween.ScaleAdd(this.gameObject, new Vector3(amount,amount,amount) , 0.3F);
-		}
-	
-		void StickTarget(Vector3 location){
-			this.transform.position = location;
-		}
+
 		*/
 	
 }

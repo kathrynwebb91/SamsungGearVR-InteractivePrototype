@@ -14,14 +14,11 @@ public class Selectable : MonoBehaviour {
 
 	private ObjectState state;
     
-	private bool highlighted;
-    private bool firstHit;
+	//private bool highlighted;
 
 	void Awake(){
 		state =  GetComponent<ObjectState>();
-		highlighted = false;
-        firstHit = true;
-
+		//highlighted = false;
 	}
 
 	void Start () {
@@ -37,13 +34,13 @@ public class Selectable : MonoBehaviour {
                 this.gameObject.AddComponent("Halo");
             }*/
 
-                CheckHit();
+                //CheckHit();
 
 				Ray ray;
 
                 if (cameraControllerTest.enabled) {
-					print ("CamEnabled");
 					ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
+					//ray = cameraControllerTest.ScreenPointToRay(Input.mousePosition + Vector3.one);
 				} else {
 					ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
 				}
@@ -66,21 +63,4 @@ public class Selectable : MonoBehaviour {
 		}
 	}
 
-    void CheckHit()
-    {
-		Ray ray;
-		if (cameraControllerTest.enabled) {
-			print ("CamEnabled");
-			ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
-		} else {
-			ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
-		}
-        RaycastHit hit = new RaycastHit();
-
-        if (this.GetComponent<Collider>().Raycast(ray, out hit, 1000) && firstHit)
-        {
-            state.distance = hit.distance;
-            firstHit = false;
-        }
-    }
 }
