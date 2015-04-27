@@ -15,7 +15,7 @@ public class TargetView : View
 
         void Awake()
         {
-            state = GetComponentInParent<ObjectState>();
+            state = GetComponent<ObjectState>();
             if (this.transform.childCount > 0)
             {
                 //Switchable childstate =  (Switchable) this.transform.GetChild(1);

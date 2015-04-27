@@ -10,6 +10,7 @@ using System.Collections;
 public class Selectable : MonoBehaviour {
 
     public OVRCameraRig cameraController;
+	public Camera cameraControllerTest;
 
 	private ObjectState state;
     
@@ -38,7 +39,14 @@ public class Selectable : MonoBehaviour {
 
                 CheckHit();
 
-                Ray ray = new Ray(cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+				Ray ray;
+
+                if (cameraControllerTest.enabled) {
+					print ("CamEnabled");
+					ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
+				} else {
+					ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+				}
 
                 //GameObject.Find("PhotoSphereExhibition").GetComponent<Collider> ().Raycast (photosphereray, out spherehit, 100.0f);
                 //Vector3 newpoint = spherehit.point - new Vector3(0.1F, 0.1F, 0.1F);
@@ -60,7 +68,13 @@ public class Selectable : MonoBehaviour {
 
     void CheckHit()
     {
-        Ray ray = new Ray(cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+		Ray ray;
+		if (cameraControllerTest.enabled) {
+			print ("CamEnabled");
+			ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
+		} else {
+			ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+		}
         RaycastHit hit = new RaycastHit();
 
         if (this.GetComponent<Collider>().Raycast(ray, out hit, 1000) && firstHit)

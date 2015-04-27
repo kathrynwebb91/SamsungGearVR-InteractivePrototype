@@ -13,6 +13,7 @@ public class RayInteractions : MonoBehaviour {
 
 	private ObjectState	state;
 	public OVRCameraRig cameraController;
+	public Camera cameraControllerTest;
 
 
 	void Awake(){
@@ -26,12 +27,18 @@ public class RayInteractions : MonoBehaviour {
 
 	void Update () {
 		RaycastHit rayHit;
-		Ray ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
-		
-		if (Physics.Raycast(ray, out rayHit ,1000)) {
+		Ray ray;
+		if (cameraControllerTest.enabled) {
+			ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
+		} else {
+			ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
+		}
+
+		if (Physics.Raycast(ray, out rayHit ,100.0F)) {
 			if(rayHit.collider.gameObject == gameObject)
 			{
 				state.hit = true;
+				print ("Hit!");
 			}else{
 				state.hit = false;
 			}

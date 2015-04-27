@@ -17,36 +17,40 @@ public class SwapPrefab : MonoBehaviour {
     private bool            prefabChanging;
 
     private string[] prefabNames = {
-        "SpriteBottle",
-        "CokeCan",
-        "CokeCup"
+        "Object1",
+        "Object2",
+        "Object3"
     };
 
 	void Awake(){
-        state = GetComponent<ObjectState>();  
+        state = this.GetComponent<ObjectState>();  
         prefabChanging = true;
         InstatiatePrefab();
 	}
 
     void Update()
     {
-        int newPrefabID = state.prefabNum;
 
-        if (newPrefabID != currentPrefabID)
+		if (state.selected)
         {
-            prefabChanging = true;
-            if (newPrefabID > currentPrefabID)
-            {
-                NextPrefab();
-            }
-            if (newPrefabID < currentPrefabID)
-            {
-                PrevPrefab();
-            }
+            int newPrefabID = state.prefabNum;
 
-            UpdatePrefab();
-            prefabChanging = false;
+            if (newPrefabID != currentPrefabID)
+            {
+                prefabChanging = true;
+                if (newPrefabID > currentPrefabID)
+                {
+                    NextPrefab();
+                }
+                if (newPrefabID < currentPrefabID)
+                {
+                    PrevPrefab();
+                }
 
+                UpdatePrefab();
+                prefabChanging = false;
+
+            }
         }
 
     }
@@ -62,10 +66,8 @@ public class SwapPrefab : MonoBehaviour {
         //Load Prefab
         currentPrefabID = state.prefabNum;
         currentPrefabName = prefabNames[currentPrefabID];
-        currentPrefab = (GameObject)Instantiate(Resources.Load(currentPrefabName));
-        //Positions prefab in the same palce as this parent object
-        currentPrefab.transform.parent = this.transform;
-        currentPrefab.transform.localPosition = new Vector2(0, 0);
+		currentPrefab = (GameObject)Instantiate(Resources.Load(currentPrefabName),transform.position, transform.rotation);
+
     }
 
     void NextPrefab()
