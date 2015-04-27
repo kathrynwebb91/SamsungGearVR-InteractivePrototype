@@ -6,7 +6,7 @@ using strange.extensions.mediation.impl;
 using strange.extensions.signal.impl;
 
 [RequireComponent(typeof(ObjectState))]
-public class TargetView : View
+public class PortalMenuView : View
 {
         public ObjectState     	state;
         private int             activeChild { get; set; }

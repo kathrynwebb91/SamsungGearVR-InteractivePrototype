@@ -92,6 +92,7 @@ public class SwapPrefab : MonoBehaviour {
 	void UpdatePrefabColor()
 	{
 		currentPrefab.renderer.material.color = prefabColors[state.colorNum];
+		currentColorID = state.colorNum;
 	}
 	
 	void InstatiatePrefab()
