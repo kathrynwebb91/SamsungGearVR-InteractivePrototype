@@ -389,6 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37070e8d405ce40388a6a5b3a5f12edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  palette:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &183267240
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +656,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37070e8d405ce40388a6a5b3a5f12edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  palette:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!23 &704385825
 Renderer:
   m_ObjectHideFlags: 0
@@ -868,6 +880,18 @@ Prefab:
       propertyPath: cameraControllerTest
       value: 
       objectReference: {fileID: 1077748319}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
   m_RootGameObject: {fileID: 1909024316}
@@ -1529,7 +1553,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 100, y: 80, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1210225955
 GameObject:
@@ -1785,6 +1809,18 @@ Prefab:
       propertyPath: cameraControllerTest
       value: 
       objectReference: {fileID: 1077748319}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596602, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da214f69e3a2d422d951c98f38c9fd0e, type: 2}
   m_RootGameObject: {fileID: 1159177349}
@@ -2097,7 +2133,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 100, y: 80, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1917787617
 GameObject:

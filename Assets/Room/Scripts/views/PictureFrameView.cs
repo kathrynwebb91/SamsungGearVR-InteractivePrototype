@@ -18,7 +18,7 @@ namespace Demo {
 		override protected void Awake()
 		{
 			base.Awake();
-			state = GetComponent<ObjectState>();
+			state = this.GetComponent<ObjectState>();
 			frameColour = gameObject.GetComponentInChildren<ChangeColour>();
 			frame = gameObject.transform.FindChild("Frame").gameObject;
 			artwork = gameObject.transform.FindChild("ArtWork").gameObject;
@@ -43,14 +43,16 @@ namespace Demo {
 				switch (evt)
 				{
 				case TouchEvent.Tap:
-						frameColour.setColour(Color.cyan);
-						frame.GetComponent<SwapPrefab>().nextPrefab();
+					frameColour.setColour(Color.cyan);
+					frame.GetComponent<SwapPrefab>().nextPrefab();
 					break;
 				case TouchEvent.SwipeLeft:
 					artwork.GetComponent<SwapMaterial>().nextMaterial();
+					artwork.GetComponent<SwapMaterial>().UpdateImage();
 					break;
 				case TouchEvent.SwipeRight:
 					artwork.GetComponent<SwapMaterial>().previousMaterial();
+					artwork.GetComponent<SwapMaterial>().UpdateImage();
 					break;
 				case TouchEvent.SwipeUp:
 
