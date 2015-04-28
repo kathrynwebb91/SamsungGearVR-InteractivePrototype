@@ -12,27 +12,30 @@ public class RayInteractions : MonoBehaviour {
 	protected bool hit = false;
 
 	private ObjectState	state;
-	public OVRCameraRig cameraController;
-	public Camera cameraControllerTest;
-
+	private Transform camTrans;
+	private Vector3 camForward;
 
 	void Awake(){
 		hit = false;
 		state =  GetComponent<ObjectState>();
+
+		setCamera(Camera.main);
 	}
 
 	void Start () {
 		
 	}
 
+	void setCamera(Camera camera)
+	{
+		camTrans = camera.transform;
+		camForward = camera.transform.forward;
+	}
+
 	void Update () {
 		RaycastHit rayHit;
 		Ray ray;
-		if (cameraControllerTest.enabled) {
-			ray = new Ray (cameraControllerTest.transform.position, cameraControllerTest.transform.forward);
-		} else {
-			ray = new Ray (cameraController.centerEyeAnchor.position, cameraController.centerEyeAnchor.forward);
-		}
+		ray = new Ray (camTrans.position, camForward);
 
 		if (Physics.Raycast(ray, out rayHit ,1000)) {
 			if(rayHit.collider.gameObject == gameObject)
@@ -48,7 +51,5 @@ public class RayInteractions : MonoBehaviour {
 		}
 	}
 
-	void attachObjectToGaze(){
-		
-	}
+
 }
