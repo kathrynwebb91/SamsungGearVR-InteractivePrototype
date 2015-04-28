@@ -17,9 +17,8 @@ public class SwapMaterial : MonoBehaviour
 
 
 	public void UpdateImage(){
-		print("updating image!");
+		print (materialIndex);
 		// it might change over time, so isChanging.
-
 		isChanging = true;
 		this.renderer.sharedMaterial = materialNames[materialIndex];
 		isChanging = false;

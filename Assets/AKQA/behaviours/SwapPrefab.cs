@@ -14,7 +14,7 @@ public class SwapPrefab : MonoBehaviour
 
 	void Awake ()
 	{
-		
+		ApplyPrefab ();
 	}
 	
 

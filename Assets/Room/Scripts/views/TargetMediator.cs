@@ -30,7 +30,7 @@ namespace Demo {
 		
 		
 		protected void InputHandler(TouchEvent inputType){
-			
+
 			view.receivedInteraction(inputType);
 		}
     }

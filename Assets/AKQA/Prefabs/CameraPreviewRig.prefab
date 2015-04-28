@@ -29,8 +29,8 @@ GameObject:
   - 4: {fileID: 446348}
   - 114: {fileID: 11445116}
   m_Layer: 0
-  m_Name: GameObject
-  m_TagString: MainCamera
+  m_Name: CameraPreviewRig
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.13813019, y: 0, z: -52.3698616}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446350}
@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82533d8a03374dcab87956771483adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yaw: {fileID: 146350}
+  pitch: {fileID: 146352}
+  tilt: {fileID: 0}
 --- !u!124 &12446352
 Behaviour:
   m_ObjectHideFlags: 1

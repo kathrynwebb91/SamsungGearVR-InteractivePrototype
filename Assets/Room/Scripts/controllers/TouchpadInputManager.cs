@@ -22,12 +22,12 @@ namespace Demo
 	public class TouchpadInputManager : InputManager
 	{
         [Inject]
-		public TouchpadInputSignal<String> touchInputSignal { get; set;}
+		public TouchpadInputSignal<TouchEvent> touchInputSignal { get; set;}
 
 		public TouchpadInputManager ()
 		{
 			OVRTouchpad.TouchHandler += RecieveInput;
-            touchInputSignal = new TouchpadInputSignal<String>();
+			touchInputSignal = new TouchpadInputSignal<TouchEvent>();
 		}
 
 		public void RecieveInput(object sender, EventArgs args)
@@ -39,27 +39,27 @@ namespace Demo
 			switch (touchEvent) {
 			case OVRTouchpad.TouchEvent.SingleTap:
 				//Debug.Log ("SINGLE CLICK\n");
-                touchInputSignal.Dispatch("tap");
+				touchInputSignal.Dispatch(TouchEvent.Tap);
 				break;
 				
 			case OVRTouchpad.TouchEvent.Left:
 				//Debug.Log ("LEFT SWIPE\n");
-                touchInputSignal.Dispatch("left");
+				touchInputSignal.Dispatch(TouchEvent.SwipeLeft);
 				break;
 				
 			case OVRTouchpad.TouchEvent.Right:
 				//Debug.Log ("RIGHT SWIPE\n");
-                touchInputSignal.Dispatch("right");
+				touchInputSignal.Dispatch(TouchEvent.SwipeRight);
 				break;
 				
 			case OVRTouchpad.TouchEvent.Up:
 				//Debug.Log ("UP SWIPE\n");
-                touchInputSignal.Dispatch("up");
+				touchInputSignal.Dispatch(TouchEvent.SwipeUp);
 				break;
 				
 			case OVRTouchpad.TouchEvent.Down:
 				//Debug.Log ("DOWN SWIPE\n");
-                touchInputSignal.Dispatch("down");
+				touchInputSignal.Dispatch(TouchEvent.SwipeDown);
 				break;
 			}
 		}
