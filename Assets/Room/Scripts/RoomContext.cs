@@ -22,15 +22,15 @@ namespace Demo{
 			// Views
 			// bind our view to its mediator
 			//mediationBinder.Bind<GuiView>().To<GuiMediator>();
-			mediationBinder.Bind<PictureFrameView>().To<PictureFrameMediator>();
 			mediationBinder.Bind<TargetView>().To<TargetMediator>();
-			mediationBinder.Bind<PortalMenuView>().To<PortalMenuMediator>();
+			mediationBinder.Bind<PictureFrameView>().To<PictureFrameMediator>();
+			//mediationBinder.Bind<PortalMenuView>().To<PortalMenuMediator>();
 
 			// Managers
 			// bind our interface to a concrete implementation
 			// so when ever something asks for ISomeManager, it will inject a single instance of TestManager.
 			injectionBinder.Bind<InputManager>().To<TouchpadInputManager>().ToSingleton();
-            injectionBinder.Bind<TouchpadInputSignal<String>>().ToSingleton();
+			injectionBinder.Bind<TouchpadInputSignal<TouchEvent>>().ToSingleton();
 
 			
 		}
