@@ -156,18 +156,10 @@ public static class OVRTouchpad
 				if(move.x > 0.0f)
 				{
 					//Debug.Log( "SWIPE: LEFT" );
-					if (TouchHandler != null)
-					{
-						TouchHandler(null, new TouchArgs () { TouchType = TouchEvent.Left });
-					}
 				}
 				else
 				{
 					//Debug.Log( "SWIPE: RIGHT" );
-					if (TouchHandler != null)
-					{
-						TouchHandler(null, new TouchArgs () { TouchType = TouchEvent.Right });
-					}
 				}
 			}
 			// Right
@@ -176,18 +168,10 @@ public static class OVRTouchpad
 				if(move.y > 0.0f)
 				{
 					//Debug.Log( "SWIPE: DOWN" );
-					if (TouchHandler != null)
-					{
-						TouchHandler(null, new TouchArgs () { TouchType = TouchEvent.Down });
-					}
 				}
 				else
 				{
 					//Debug.Log( "SWIPE: UP" );
-					if(TouchHandler != null)
-					{
-						TouchHandler(null, new TouchArgs () { TouchType = TouchEvent.Up });
-					}
 				}
 			}
 		}
