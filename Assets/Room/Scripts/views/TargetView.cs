@@ -12,10 +12,12 @@ public class TargetView : View
 {
         public ObjectState     	state;
         private int             activeChild { get; set; }
+		private ChangeColour	colorSwitcher;
 
         void Awake()
         {
             state = this.GetComponent<ObjectState>();
+			colorSwitcher = this.GetComponent<ChangeColour>();
         }
 
 		// Use this for initialization
@@ -36,22 +38,22 @@ public class TargetView : View
 					state.selected = !state.selected;
 					break;
 				case TouchEvent.SwipeLeft:
-					if (state.rotateable) {
-						state.rotateDirection = ObjectState.RotateDirection.Left;
-					} else if(state.switchable) {
-						//state.colorNum++;
-					} else{
-						state.distance++;
-					}
+					//if (state.rotateable) {
+					//	state.rotateDirection = ObjectState.RotateDirection.Left;
+					//} else if(state.switchable) {
+						colorSwitcher.previousColor();
+					//} else{
+					//	state.distance++;
+					//}
 					break;
 				case TouchEvent.SwipeRight:
-					if (state.rotateable) {
-						state.rotateDirection = ObjectState.RotateDirection.Right;
-					} else if(state.switchable) {
-						//state.colorNum--;
-					} else{
-						state.distance--;
-					}
+					//if (state.rotateable) {
+					//	state.rotateDirection = ObjectState.RotateDirection.Right;
+					//} else if(state.switchable) {
+						colorSwitcher.nextColor();
+					//} else{
+					//	state.distance--;
+					//}
 					break;
 				case TouchEvent.SwipeUp:
 					if (state.selected) {

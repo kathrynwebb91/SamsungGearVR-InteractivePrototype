@@ -7,7 +7,7 @@ public class SwapMaterial : MonoBehaviour
 	private int materialIndex = 0;
 
 	public bool isChanging {get;set;}
-	public Material[] materialNames = new Material[5];
+	public Material[] materialNames = new Material[3];
 
 	void Awake ()
 	{
@@ -17,27 +17,32 @@ public class SwapMaterial : MonoBehaviour
 
 
 	public void UpdateImage(){
-		print (materialIndex);
 		// it might change over time, so isChanging.
 		isChanging = true;
 		this.renderer.sharedMaterial = materialNames[materialIndex];
 		isChanging = false;
 	}
 
-	public int setMaterialIndex(int index)
+	public void setMaterialIndex(int index)
 	{
-		return materialIndex = materialIndex < 0 ? materialNames.Length -1 : (materialIndex >= materialNames.Length ? 0 : materialIndex);
+		 materialIndex = index < 0 ? materialNames.Length -1 : (index >= materialNames.Length ? 0 : index);
 	}
 
-	public int nextMaterial()
+	public void nextMaterial()
 	{
-		return setMaterialIndex(materialIndex + 1);
+		print ("pre update " + materialIndex);
+		setMaterialIndex(materialIndex + 1);
+		print ("post update " + materialIndex);
+		UpdateImage ();
 	}
 
 
-	public int previousMaterial()
+	public void previousMaterial()
 	{
-		return setMaterialIndex(materialIndex - 1);
+		print ("pre update " + materialIndex);
+		setMaterialIndex(materialIndex - 1);
+		print ("post update " + materialIndex);
+		UpdateImage ();
 	}
 
 }

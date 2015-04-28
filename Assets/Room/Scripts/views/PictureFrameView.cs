@@ -14,6 +14,7 @@ namespace Demo {
 
 
 		private ObjectState state;
+		public bool				faded;
 
 		override protected void Awake()
 		{
@@ -22,17 +23,7 @@ namespace Demo {
 			frameColour = gameObject.GetComponentInChildren<ChangeColour>();
 			frame = gameObject.transform.FindChild("Frame").gameObject;
 			artwork = gameObject.transform.FindChild("ArtWork").gameObject;
-		}
-
-
-		// Use this for initialization
-		void Start () {
-		
-		}
-		
-		// Update is called once per frame
-		void Update () {
-		
+			faded = false;
 		}
 
 
@@ -44,15 +35,13 @@ namespace Demo {
 				{
 				case TouchEvent.Tap:
 					frameColour.setColour(Color.cyan);
-					frame.GetComponent<SwapPrefab>().nextPrefab();
+					//frame.GetComponent<SwapPrefab>().nextPrefab();
 					break;
 				case TouchEvent.SwipeLeft:
 					artwork.GetComponent<SwapMaterial>().nextMaterial();
-					artwork.GetComponent<SwapMaterial>().UpdateImage();
 					break;
 				case TouchEvent.SwipeRight:
 					artwork.GetComponent<SwapMaterial>().previousMaterial();
-					artwork.GetComponent<SwapMaterial>().UpdateImage();
 					break;
 				case TouchEvent.SwipeUp:
 
@@ -62,6 +51,32 @@ namespace Demo {
 					break;
 				}
 			}
+		}
+
+		void Update(){
+			if (state.selected && !faded) {
+				print ("about to fade!");
+				//GameObject.Find("Room").SetActive(false);
+				FadeOut("Room");     
+			}
+		}
+		
+		void updateTrailAlpha(float val)
+		{
+			print ("updating val!");
+			renderer.material.SetColor("_Color",new Color(val,val,val,val));
+		}
+		
+		void FadeOut(string target){
+			//iTween.FadeTo(GameObject.Find(target).renderer.material, 0.0f, 1f);
+			Hashtable hash = new Hashtable ();
+			hash.Add ("from", 1);
+			hash.Add ("to", 0);
+			hash.Add ("time", 1);
+			hash.Add ("onupdate", "updateTrailAlpha");
+			iTween.ValueTo (GameObject.Find ("PortalWall").gameObject, hash);
+			print ("faded!");
+			faded = true;
 		}
 
 

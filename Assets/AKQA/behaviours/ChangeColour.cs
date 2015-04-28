@@ -7,46 +7,39 @@ public class ChangeColour : MonoBehaviour {
 	private int paletteIndex = 0;
 	public bool isChanging {get;set;}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void UpdateColor(){
 		// it might change over time, so isChanging.
 		isChanging = true;
-		renderer.material.color = palette[paletteIndex];
+		this.transform.GetChild (0).renderer.material.color = palette[paletteIndex];
 		isChanging = false;
 	}
 
 	public void setColour(Color color)
 	{
 		isChanging = true;
-		renderer.material.color = color;
+		this.renderer.material.color = color;
 		isChanging = false;
 	}
 
 	void setPalleteIndex(int index)
 	{
 		// if has palette.
-		paletteIndex = paletteIndex < 0 ? palette.Length -1 : (paletteIndex >= palette.Length ? 0 : paletteIndex);
+		paletteIndex = index < 0 ? palette.Length -1 : (index >= palette.Length ? 0 : index);
 
 	}
 
-	public void nextMaterial()
+	public void nextColor()
 	{
 		setPalleteIndex(paletteIndex + 1);
+		UpdateColor ();
 	}
 	
 	
-	public void previousMaterial()
+	public void previousColor()
 	{
 		setPalleteIndex(paletteIndex - 1);
+		UpdateColor ();
 	}
 
 }
