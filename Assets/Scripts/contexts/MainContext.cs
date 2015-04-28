@@ -23,7 +23,8 @@ namespace Demo{
 			// bind our view to its mediator
 			//mediationBinder.Bind<GuiView>().To<GuiMediator>();
 			mediationBinder.Bind<TargetView>().To<TargetMediator>();
-			
+			mediationBinder.Bind<PortalMenuView>().To<PortalMenuMediator>();
+
 			// Managers
 			// bind our interface to a concrete implementation
 			// so when ever something asks for ISomeManager, it will inject a single instance of TestManager.

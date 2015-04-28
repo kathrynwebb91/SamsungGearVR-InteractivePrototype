@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Reflection;
 
 using strange.extensions.mediation.impl;
@@ -9,108 +10,78 @@ using strange.extensions.signal.impl;
 public class PortalMenuView : View
 {
         public ObjectState     	state;
-        private int             activeChild { get; set; }
+		public bool				faded;
 
         void Awake()
         {
             state = this.GetComponent<ObjectState>();
+			faded = false;
         }
 
-		// Use this for initialization
-		void Start ()
-		{
-            activeChild = 0;
-			//dragPositionMultiplier = 1.5F;
-			//targetDistance = this.transform.position.magnitude; 
-
-		}
 
         public void tapped()
         {
             if (state.hit)
             {
+				print ("PORTAL MENU GOT TAPPED!");
                 state.selected = !state.selected;
             }
         }
 
         public virtual void swipedLeft()
         {
-			if (state.selected) {
-				if (state.rotateable) {
-					state.rotateDirection = "left";
-				} else if(state.switchable) {
-					state.colorNum++;
-				} else{
-					state.distance++;
-				}
-			}
+
+			state.destinationNum++;
+
         }
 
 		public virtual void swipedRight()
         {
-			if (state.selected) {
-				if (state.rotateable) {
-					state.rotateDirection = "right";
-				} else if(state.switchable) {
-					state.colorNum--;
-				} else{
-					state.distance--;
-				}
-			}
+
+			state.destinationNum--;
+
 		}
 
 		public virtual void swipedUp()
         {
-			if (state.selected) {
-				if (state.rotateable) {
-					state.rotateDirection = "up";
-				} else if(state.switchable) {
-					state.prefabNum--;
-				} else{
 
-				}
-			}
             
         }
 
 		public virtual void swipedDown()
         {
-			if (state.selected) {
-				if (state.rotateable) {
-						state.rotateDirection = "down";
-				} else if(state.switchable) {
-					state.prefabNum++;
-				} else{
 
-				}
-			}
         }
 
-		// Update is called once per frame
-		void Update ()
-		{
-
-            //state.selected = false;// this might work dependin gon the order of things.
-		}
-
-		
-		/***Interaction functions***/
-
-	/*
-
-		//Select helper function. Shows/hides glow effect when item is selected/deselected
-		void ToggleHalo(bool switcher){
-			//Highlight product
-			var haloEnabledProperty = haloHighlight.GetType().GetProperty("enabled");
-			if (switcher) {
-				haloEnabledProperty.SetValue (haloHighlight, true, null);
-			} else {
-				haloEnabledProperty.SetValue (haloHighlight, false, null);
+		void Update(){
+			if (state.selected && !faded) {
+				print ("about to fade!");
+				//GameObject.Find("Room").SetActive(false);
+				FadeOut("Room");     
 			}
 		}
-		
 
-		*/
+		void updateTrailAlpha(float val)
+		{
+			print ("updating val!");
+			renderer.material.SetColor("_Color",new Color(val,val,val,val));
+		}
+	
+		void FadeOut(string target){
+			//iTween.FadeTo(GameObject.Find(target).renderer.material, 0.0f, 1f);
+			Hashtable hash = new Hashtable ();
+			hash.Add ("from", 1);
+			hash.Add ("to", 0);
+			hash.Add ("time", 1);
+			hash.Add ("onupdate", "updateTrailAlpha");
+			iTween.ValueTo (GameObject.Find ("PortalWall").gameObject, hash);
+		print ("faded!");
+			faded = true;
+		}
+
+
+	
+	
 	
 }
 
