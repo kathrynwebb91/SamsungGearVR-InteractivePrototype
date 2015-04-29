@@ -7,7 +7,7 @@ public class SwapMaterial : MonoBehaviour
 	private int materialIndex = 0;
 
 	public bool isChanging {get;set;}
-	public Material[] materialNames = new Material[3];
+	public Material[] materialNames = new Material[4];
 
 	void Awake ()
 	{

@@ -12,29 +12,37 @@ public class RayInteractions : MonoBehaviour {
 	protected bool hit = false;
 
 	private ObjectState	state;
+	private Camera cam;
 	private Transform camTrans;
 	private Vector3 camForward;
 
 	void Awake(){
 		hit = false;
 		state =  GetComponent<ObjectState>();
-
-		setCamera(Camera.main);
+		setCamera (Camera.main);
 	}
 
 	void Start () {
 		
 	}
 
+	void updateCameraVals()
+	{
+		camTrans = cam.transform;
+		camForward = cam.transform.forward;
+	}
+
 	void setCamera(Camera camera)
 	{
-		camTrans = camera.transform;
-		camForward = camera.transform.forward;
+		cam = camera;
+		updateCameraVals ();
 	}
+
 
 	void Update () {
 		RaycastHit rayHit;
 		Ray ray;
+		updateCameraVals ();
 		ray = new Ray (camTrans.position, camForward);
 
 		if (Physics.Raycast(ray, out rayHit ,1000)) {

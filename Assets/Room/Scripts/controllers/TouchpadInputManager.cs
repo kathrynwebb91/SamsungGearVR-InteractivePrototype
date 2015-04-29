@@ -34,7 +34,7 @@ namespace Demo
 		{
 			var touchArgs = (OVRTouchpad.TouchArgs)args;
 			OVRTouchpad.TouchEvent touchEvent = touchArgs.TouchType;
-			Debug.Log ("Touch event");
+			//Debug.Log ("Touch event");
 			
 			switch (touchEvent) {
 			case OVRTouchpad.TouchEvent.SingleTap:

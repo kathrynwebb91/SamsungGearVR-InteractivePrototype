@@ -6,7 +6,7 @@ using strange.extensions.signal.impl;
 
 namespace Demo {
 
-	public class TetrisView : View {
+	public class PictureFrameView : View {
 
 		private ChangeColour frameColour;
 		private GameObject frame;

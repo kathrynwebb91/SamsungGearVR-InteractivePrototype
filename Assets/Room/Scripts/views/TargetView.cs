@@ -13,19 +13,19 @@ public class TargetView : View
         public ObjectState     	state;
         private int             activeChild { get; set; }
 		private ChangeColour	colorSwitcher;
+		private SwapPrefab		prefabSwitcher;
 
         void Awake()
         {
             state = this.GetComponent<ObjectState>();
 			colorSwitcher = this.GetComponent<ChangeColour>();
+			prefabSwitcher = this.GetComponent<SwapPrefab>();
         }
 
 		// Use this for initialization
 		void Start ()
 		{
             activeChild = 0;
-			//dragPositionMultiplier = 1.5F;
-			//targetDistance = this.transform.position.magnitude; 
 		}
 
 		public void receivedInteraction(TouchEvent evt)
@@ -41,7 +41,14 @@ public class TargetView : View
 					//if (state.rotateable) {
 					//	state.rotateDirection = ObjectState.RotateDirection.Left;
 					//} else if(state.switchable) {
-						colorSwitcher.previousColor();
+						if(colorSwitcher){
+							colorSwitcher.previousColor();
+							//iTween.RotateAdd(this.gameObject, new Vector3(0, 360 ,0), 1.0F);
+						}
+
+						if(prefabSwitcher){
+							prefabSwitcher.previousPrefab();
+						}
 					//} else{
 					//	state.distance++;
 					//}
@@ -50,7 +57,13 @@ public class TargetView : View
 					//if (state.rotateable) {
 					//	state.rotateDirection = ObjectState.RotateDirection.Right;
 					//} else if(state.switchable) {
+					if(colorSwitcher){
 						colorSwitcher.nextColor();
+					}
+					
+					if(prefabSwitcher){
+						prefabSwitcher.previousPrefab();
+					}
 					//} else{
 					//	state.distance--;
 					//}
