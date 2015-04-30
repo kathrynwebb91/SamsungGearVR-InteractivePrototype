@@ -28,6 +28,11 @@ public class SwapMaterial : MonoBehaviour
 		 materialIndex = index < 0 ? materialNames.Length -1 : (index >= materialNames.Length ? 0 : index);
 	}
 
+	public void setMaterial(Material mat)
+	{
+		this.renderer.sharedMaterial = mat;
+	}
+
 	public void nextMaterial()
 	{
 		print ("pre update " + materialIndex);

@@ -19,16 +19,18 @@ public class Rotateable : MonoBehaviour
 		if (state.rotateDirection != ObjectState.RotateDirection.None) {
 				switch(state.rotateDirection){
 					case ObjectState.RotateDirection.Left:
-							iTween.RotateAdd (this.gameObject, new Vector3(0,45,0), 0.4F);
+							//iTween.RotateAdd (this.gameObject, new Vector3(0,45,0), 0.4F);
 						break;
 					case ObjectState.RotateDirection.Right:
-							iTween.RotateAdd (this.gameObject, new Vector3(0,-45,0), 0.4F);
+							//iTween.RotateAdd (this.gameObject, new Vector3(0,-45,0), 0.4F);
 						break;
 					case ObjectState.RotateDirection.Up:
-							iTween.RotateAdd (this.gameObject, new Vector3(0,0,45), 0.4F);
+							//iTween.RotateAdd (this.transform.GetChild(0).gameObject, new Vector3(0,0,45), 0.4F);
+							iTween.RotateAdd (this.gameObject, new Vector3(-45,0,0), 0.4F);
 						break;
 					case ObjectState.RotateDirection.Down:
-							iTween.RotateAdd (this.gameObject, new Vector3(0,0,-45), 0.4F);
+							//iTween.RotateAdd (this.transform.GetChild(0).gameObject, new Vector3(0,0,-45), 0.4F);
+							iTween.RotateAdd (this.gameObject, new Vector3(45,0,0), 0.4F);
 						break;
 				}
 			state.rotateDirection = ObjectState.RotateDirection.None;

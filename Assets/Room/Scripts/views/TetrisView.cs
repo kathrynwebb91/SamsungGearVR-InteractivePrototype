@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using strange.extensions.mediation.impl;
@@ -6,43 +6,59 @@ using strange.extensions.signal.impl;
 
 namespace Demo {
 
-	public class PictureFrameView : View {
+	public class TetrisView : View {
 
 		private ChangeColour frameColour;
 		private GameObject frame;
-		private GameObject artwork;
-
-
-		private ObjectState state;
-		public bool				faded;
+		private int numberOfBlocks = 1;
+		private GameObject currentBlock;
+		private ArrayList placedBlocks = new ArrayList();
+		private BlockState blockState;
 
 		override protected void Awake()
 		{
 			base.Awake();
-			state = this.GetComponent<ObjectState>();
 			frameColour = gameObject.GetComponentInChildren<ChangeColour>();
-			frame = gameObject.transform.FindChild("Frame").gameObject;
-			artwork = gameObject.transform.FindChild("ArtWork").gameObject;
-			faded = false;
+			frame = gameObject.transform.FindChild("TetrisFrame").gameObject;
+			currentBlock = generateNewBlock ();
+			currentBlock.AddComponent<BlockState> ();
+			blockState =  currentBlock.GetComponent<BlockState>();
+		}
+
+		void moveBlock(GameObject block){
+			iTween.MoveBy (block, new Vector3 (0, -5, 0), 0.1F);
+		}
+
+		void addBlock(){
+			currentBlock = generateNewBlock ();
+		}
+
+		GameObject generateNewBlock(){
+			int typenum = Random.Range(0, ((int)BlockState.BlockType.NumberOfTypes - 1));
+			string blockType = ((BlockState.BlockType)typenum).ToString ();
+			GameObject newBlock = (GameObject)Instantiate(Resources.Load("Prefabs/" + blockType+"Block", typeof(GameObject)),transform.position, transform.rotation);
+			newBlock.transform.parent = this.gameObject.transform;
+			float ydisp = 84 - 12.5F;
+			float xdisp = 7.5F; 
+			newBlock.transform.localPosition = new Vector3(0,ydisp,xdisp);
+			return newBlock;
 		}
 
 
 		public void receivedInteraction(TouchEvent evt)
 		{
-			if(state.hit || state.selected)
-			{
+			//if(state.hit || state.selected)
+			//{
 				switch (evt)
 				{
 				case TouchEvent.Tap:
-					frameColour.setColour(Color.cyan);
-					state.selected = !state.selected;
-					//frame.GetComponent<SwapPrefab>().nextPrefab();
+
 					break;
 				case TouchEvent.SwipeLeft:
-					artwork.GetComponent<SwapMaterial>().nextMaterial();
+
 					break;
 				case TouchEvent.SwipeRight:
-					artwork.GetComponent<SwapMaterial>().previousMaterial();
+
 					break;
 				case TouchEvent.SwipeUp:
 
@@ -51,37 +67,16 @@ namespace Demo {
 
 					break;
 				}
-			}
+			//}
 		}
 
 		void Update(){
-			if (state.selected) {
-				print ("selected!");
-			}
-			if (state.selected && !faded) {
-				print ("about to fade!");
-				//GameObject.Find("Room").SetActive(false);
-				GameObject.Find ("Room").GetComponent<Fader>().FadeOut();
-				faded=true;
+			if (currentBlock) {
+				//if(){
+					moveBlock (currentBlock);
+				//}
 			}
 		}
-		
 
-		
-		/*void FadeOut(string target){
-			//iTween.FadeTo(GameObject.Find(target).renderer.material, 0.0f, 1f);
-			Hashtable hash = new Hashtable ();
-			hash.Add ("from", 1);
-			hash.Add ("to", 0);
-			hash.Add ("time", 1);
-			hash.Add ("onupdate", "updateAlpha");
-			GameObject wall = GameObject.Find ("Room").transform.GetChild (2).gameObject;
-			print (wall.name);
-			iTween.ValueTo (wall, hash);
-			faded = true;
-		}*/
-
-
-		
 	}
 }

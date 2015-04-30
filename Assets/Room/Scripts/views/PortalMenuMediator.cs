@@ -17,6 +17,8 @@ namespace Demo {
 		public PortalMenuView view { get; set; }
 
 
+
+
 		// Use this for initialization
 		public override void OnRegister()
 		{

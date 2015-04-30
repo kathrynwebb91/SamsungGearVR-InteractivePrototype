@@ -6,12 +6,12 @@ using strange.extensions.signal.impl;
 
 namespace Demo {
 
-	public class TetrisView : View {
+	public class PictureFrameView : View {
 
 		private ChangeColour frameColour;
 		private GameObject frame;
 		private GameObject artwork;
-
+		private GameObject photosphere;
 
 		private ObjectState state;
 		public bool				faded;
@@ -23,6 +23,8 @@ namespace Demo {
 			frameColour = gameObject.GetComponentInChildren<ChangeColour>();
 			frame = gameObject.transform.FindChild("Frame").gameObject;
 			artwork = gameObject.transform.FindChild("ArtWork").gameObject;
+			photosphere = GameObject.Find("Sphere360");
+			photosphere.GetComponent<SwapMaterial> ().UpdateImage ();
 			faded = false;
 		}
 
@@ -40,9 +42,11 @@ namespace Demo {
 					break;
 				case TouchEvent.SwipeLeft:
 					artwork.GetComponent<SwapMaterial>().nextMaterial();
+					photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.renderer.material);
 					break;
 				case TouchEvent.SwipeRight:
 					artwork.GetComponent<SwapMaterial>().previousMaterial();
+					photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.renderer.material);
 					break;
 				case TouchEvent.SwipeUp:
 

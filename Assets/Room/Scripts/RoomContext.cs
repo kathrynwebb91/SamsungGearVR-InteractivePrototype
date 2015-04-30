@@ -16,14 +16,13 @@ namespace Demo{
 			
 			// we bind a command to StartSignal since it is invoked by SignalContext (the parent class) on Launch()
 			commandBinder.Bind<StartSignal>().To<GameStartCommand>().Once();
-			
-			
 
 			// Views
 			// bind our view to its mediator
 			//mediationBinder.Bind<GuiView>().To<GuiMediator>();
 			mediationBinder.Bind<TargetView>().To<TargetMediator>();
 			mediationBinder.Bind<PictureFrameView>().To<PictureFrameMediator>();
+			mediationBinder.Bind<SecretRoomView>().To<SecretRoomMediator>();
 			//mediationBinder.Bind<PortalMenuView>().To<PortalMenuMediator>();
 
 			// Managers
@@ -32,7 +31,6 @@ namespace Demo{
 			injectionBinder.Bind<InputManager>().To<TouchpadInputManager>().ToSingleton();
 			injectionBinder.Bind<TouchpadInputSignal<TouchEvent>>().ToSingleton();
 
-			
 		}
 
         public override void Launch()

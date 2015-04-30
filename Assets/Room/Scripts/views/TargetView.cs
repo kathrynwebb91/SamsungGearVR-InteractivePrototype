@@ -14,12 +14,16 @@ public class TargetView : View
         private int             activeChild { get; set; }
 		private ChangeColour	colorSwitcher;
 		private SwapPrefab		prefabSwitcher;
+		private Rotateable		rotateScript;
+		private SlotInShapes	shapeSlotScript;
 
         void Awake()
         {
             state = this.GetComponent<ObjectState>();
 			colorSwitcher = this.GetComponent<ChangeColour>();
 			prefabSwitcher = this.GetComponent<SwapPrefab>();
+			rotateScript = this.GetComponent<Rotateable>();
+			shapeSlotScript = this.GetComponent<SlotInShapes>();
         }
 
 		// Use this for initialization
@@ -30,17 +34,23 @@ public class TargetView : View
 
 		public void receivedInteraction(TouchEvent evt)
 		{
+
 			if(state.hit || state.selected)
 			{
+				print (evt.ToString());
+				print (state.hit.ToString() + state.selected.ToString());
 				switch (evt)
 				{
 				case TouchEvent.Tap:
-					state.selected = !state.selected;
+					if(!state.selected){
+						state.selected = true;
+					}else{
+						state.selected = false;
+					}
+
 					break;
 				case TouchEvent.SwipeLeft:
-					//if (state.rotateable) {
-					//	state.rotateDirection = ObjectState.RotateDirection.Left;
-					//} else if(state.switchable) {
+
 						if(colorSwitcher){
 							colorSwitcher.previousColor();
 							//iTween.RotateAdd(this.gameObject, new Vector3(0, 360 ,0), 1.0F);
@@ -49,14 +59,14 @@ public class TargetView : View
 						if(prefabSwitcher){
 							prefabSwitcher.previousPrefab();
 						}
-					//} else{
-					//	state.distance++;
-					//}
+
+						if(rotateScript){
+							state.rotateDirection = ObjectState.RotateDirection.Left;
+						}
+
 					break;
 				case TouchEvent.SwipeRight:
-					//if (state.rotateable) {
-					//	state.rotateDirection = ObjectState.RotateDirection.Right;
-					//} else if(state.switchable) {
+
 					if(colorSwitcher){
 						colorSwitcher.nextColor();
 					}
@@ -64,30 +74,30 @@ public class TargetView : View
 					if(prefabSwitcher){
 						prefabSwitcher.previousPrefab();
 					}
-					//} else{
-					//	state.distance--;
-					//}
+
+					if(rotateScript){
+						state.rotateDirection = ObjectState.RotateDirection.Right;
+					}
+
+					if(shapeSlotScript){
+						if(shapeSlotScript.checkShapeMatch()){
+							state.selected = false;
+		 				}
+					}
+
 					break;
 				case TouchEvent.SwipeUp:
 					if (state.selected) {
 						if (state.rotateable) {
 							state.rotateDirection = ObjectState.RotateDirection.Up;
-						} else if(state.switchable) {
-							//state.prefabNum--;
-						} else{
-							
-						}
+						} 
 					}
 					break;
 				case TouchEvent.SwipeDown:
 					if (state.selected) {
 						if (state.rotateable) {
 							state.rotateDirection = ObjectState.RotateDirection.Down;
-						} else if(state.switchable) {
-							//state.prefabNum++;
-						} else{
-							
-						}
+						} 
 					}
 					break;
 				}
