@@ -13,16 +13,17 @@ namespace Demo {
 		private int numberOfBlocks = 1;
 		private GameObject currentBlock;
 		private ArrayList placedBlocks = new ArrayList();
-		private BlockState blockState;
+		private TetrisBlockState blockState;
 
 		override protected void Awake()
 		{
 			base.Awake();
 			frameColour = gameObject.GetComponentInChildren<ChangeColour>();
 			frame = gameObject.transform.FindChild("TetrisFrame").gameObject;
+
 			currentBlock = generateNewBlock ();
-			currentBlock.AddComponent<BlockState> ();
-			blockState =  currentBlock.GetComponent<BlockState>();
+			currentBlock.AddComponent<TetrisBlockState> ();
+			blockState =  currentBlock.GetComponent<TetrisBlockState>();
 		}
 
 		void moveBlock(GameObject block){
@@ -34,17 +35,22 @@ namespace Demo {
 		}
 
 		GameObject generateNewBlock(){
-			int typenum = Random.Range(0, ((int)BlockState.BlockType.NumberOfTypes - 1));
-			string blockType = ((BlockState.BlockType)typenum).ToString ();
+
+			//Randomly choose new block
+			int typenum = Random.Range(0, ((int)TetrisBlockState.BlockType.NumberOfTypes - 1));
+			string blockType = ((TetrisBlockState.BlockType)typenum).ToString ();
 			GameObject newBlock = (GameObject)Instantiate(Resources.Load("Prefabs/" + blockType+"Block", typeof(GameObject)),transform.position, transform.rotation);
+
+			//Position new block
 			newBlock.transform.parent = this.gameObject.transform;
 			float ydisp = 84 - 12.5F;
 			float xdisp = 7.5F; 
 			newBlock.transform.localPosition = new Vector3(0,ydisp,xdisp);
+
 			return newBlock;
 		}
 
-
+		//TODO Swipe to rotate, tap to place
 		public void receivedInteraction(TouchEvent evt)
 		{
 			//if(state.hit || state.selected)
@@ -70,11 +76,10 @@ namespace Demo {
 			//}
 		}
 
+		//TODO Use collisions as trigger to stop movement
 		void Update(){
 			if (currentBlock) {
-				//if(){
-					moveBlock (currentBlock);
-				//}
+				moveBlock (currentBlock);
 			}
 		}
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+//Changes the material of an object, either by setting it directly or by itterating through an array of Materials set through the Editor
 public class SwapMaterial : MonoBehaviour
 {
 
@@ -10,7 +11,6 @@ public class SwapMaterial : MonoBehaviour
 	public Material[] materialNames = new Material[4];
 
 	public void UpdateImage(){
-		// it might change over time, so isChanging.
 		isChanging = true;
 		this.renderer.sharedMaterial = materialNames[materialIndex];
 		isChanging = false;
@@ -28,18 +28,14 @@ public class SwapMaterial : MonoBehaviour
 
 	public void nextMaterial()
 	{
-		print ("pre update " + materialIndex);
 		setMaterialIndex(materialIndex + 1);
-		print ("post update " + materialIndex);
 		UpdateImage ();
 	}
 
 
 	public void previousMaterial()
 	{
-		print ("pre update " + materialIndex);
 		setMaterialIndex(materialIndex - 1);
-		print ("post update " + materialIndex);
 		UpdateImage ();
 	}
 

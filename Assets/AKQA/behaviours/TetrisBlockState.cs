@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BlockState : MonoBehaviour
+public class TetrisBlockState : MonoBehaviour
 {
 		public enum BlockType{
 			T = 0,
