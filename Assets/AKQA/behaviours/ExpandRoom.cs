@@ -18,9 +18,7 @@ public class ExpandRoom : MonoBehaviour
 		//Moves target wall
 		iTween.MoveBy(this.gameObject, iTween.Hash (
 			"y",-400,
-			"time",3.0F,
-			"oncomplete","switchOnLightsWithDelays",
-			"oncompletetarget", this.gameObject
+			"time",3.0F
 			)
 		);
 
@@ -31,21 +29,31 @@ public class ExpandRoom : MonoBehaviour
 			iTween.ScaleAdd(focus, new Vector3(0,0,400), 3.0F);
 			iTween.MoveAdd(focus, new Vector3(0,0,-200), 3.0F);
 		}
+
+		switchOnLightsWithDelays ();
 	}
 
-	IEnumerator switchOnLightsWithDelays(){
-		StartCoroutine(switchOnLight(1));
-		yield return (StartCoroutine(switchOnLight(2)));
+	void switchOnLightsWithDelays(){
+		StartCoroutine (delayedLightsOn());
 	}
 
-	 IEnumerator switchOnLight(int lightnum){
+	IEnumerator delayedLightsOn(){
+		yield return new WaitForSeconds(0.3F);
+		switchOnLight(1);
+		yield return new WaitForSeconds(0.6F);
+		switchOnLight (2);
+		yield return new WaitForSeconds(0.6F);
+		switchOnLight (3);
+	}
+
+	 void switchOnLight(int lightnum){
 		GameObject.Find ("Spotlight" + lightnum).GetComponent<Light> ().intensity = 3.6F;
-		yield return new WaitForSeconds(5);
 	}
 
 	void switchOffLights(){
 		GameObject.Find ("Spotlight1").GetComponent<Light> ().intensity = 0;
 		GameObject.Find ("Spotlight2").GetComponent<Light> ().intensity = 0;
+		GameObject.Find ("Spotlight3").GetComponent<Light> ().intensity = 0;
 	}
 
 }

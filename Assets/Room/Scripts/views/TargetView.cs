@@ -64,6 +64,13 @@ public class TargetView : View
 							state.rotateDirection = ObjectState.RotateDirection.Left;
 						}
 
+						if(shapeSlotScript){
+							if(shapeSlotScript.checkShapeMatch()){
+								state.selected = false;
+							}
+						}
+
+					
 					break;
 				case TouchEvent.SwipeRight:
 
@@ -79,11 +86,6 @@ public class TargetView : View
 						state.rotateDirection = ObjectState.RotateDirection.Right;
 					}
 
-					if(shapeSlotScript){
-						if(shapeSlotScript.checkShapeMatch()){
-							state.selected = false;
-		 				}
-					}
 
 					break;
 				case TouchEvent.SwipeUp:

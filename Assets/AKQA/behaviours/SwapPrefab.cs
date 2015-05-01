@@ -5,10 +5,11 @@ using System.Collections;
 public class SwapPrefab : MonoBehaviour
 {
 	
-	public int prefabIndex = 0;
+	private int prefabIndex = 0;
+	private GameObject currentPrefab;
 	
 
-	public GameObject[] prefrabs = new GameObject[2];
+	public GameObject[] prefrabs = new GameObject[3];
 
 	public bool isChanging {get;set;}
 
@@ -21,28 +22,31 @@ public class SwapPrefab : MonoBehaviour
 	public void ApplyPrefab(){
 
 		isChanging = true;
-
 		//GameObject newPrefab = (GameObject)Instantiate(Resources.Load(prefrabs[prefabIndex]),transform.position, transform.rotation);
-		GameObject newPrefab = (GameObject)Instantiate(prefrabs[prefabIndex],transform.position, transform.rotation);
-		newPrefab.transform.parent = this.gameObject.transform;
-		newPrefab.transform.localPosition = new Vector3(0,0,0);
+		currentPrefab = (GameObject)Instantiate(prefrabs[prefabIndex],transform.position, transform.rotation);
+		currentPrefab.transform.parent = this.gameObject.transform;
+		currentPrefab.transform.localPosition = new Vector3(0,0,0);
 		isChanging = false;
 	}
 	
-	public int setPrefabIndex(int index)
+	public void setPrefabIndex(int index)
 	{
-		return prefabIndex = prefabIndex < 0 ? prefrabs.Length -1 : (prefabIndex >= prefrabs.Length ? 0 : prefabIndex);
+		prefabIndex = index < 0 ? prefrabs.Length -1 : (index >= prefrabs.Length ? 0 : index);
 	}
 	
-	public int nextPrefab()
+	public void nextPrefab()
 	{
-		return setPrefabIndex(prefabIndex + 1);
+		setPrefabIndex(prefabIndex + 1);
+		Destroy (currentPrefab);
+		ApplyPrefab ();
 	}
 	
 	
-	public int previousPrefab()
+	public void previousPrefab()
 	{
-		return setPrefabIndex(prefabIndex - 1);
+		setPrefabIndex(prefabIndex - 1);
+		Destroy (currentPrefab);
+		ApplyPrefab ();
 	}
 	
 }

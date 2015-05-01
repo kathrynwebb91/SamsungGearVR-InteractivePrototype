@@ -9,13 +9,6 @@ public class SwapMaterial : MonoBehaviour
 	public bool isChanging {get;set;}
 	public Material[] materialNames = new Material[4];
 
-	void Awake ()
-	{
-
-	}
-
-
-
 	public void UpdateImage(){
 		// it might change over time, so isChanging.
 		isChanging = true;
