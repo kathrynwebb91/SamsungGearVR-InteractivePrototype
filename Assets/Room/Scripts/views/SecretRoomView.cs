@@ -12,24 +12,27 @@ public class SecretRoomView : View
 
 	public ObjectState     	state;
 	private Drop			drop;
+	private ExpandRoom		expander;
 	//private Drop			drop;
 	
 	void Awake()
 	{
 		state = this.GetComponent<ObjectState>();
 		drop = this.GetComponent<Drop>();
+		expander = GameObject.Find("Wall - 1").GetComponent<ExpandRoom>();
 	}
 	
 	public void receivedInteraction(TouchEvent evt)
 	{
-			print ("recieved interaction");
 		if(state.hit || state.selected)
 		{
 			switch (evt)
 			{
 			case TouchEvent.Tap:
+				if(!drop.dropped){
 					drop.drop();
-				
+					expander.pushWall();
+				}
 				break;
 			case TouchEvent.SwipeLeft:
 

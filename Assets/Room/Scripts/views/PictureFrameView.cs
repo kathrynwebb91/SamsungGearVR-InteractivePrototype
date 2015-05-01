@@ -38,7 +38,7 @@ namespace Demo {
 				case TouchEvent.Tap:
 					frameColour.setColour(Color.cyan);
 					state.selected = !state.selected;
-					//frame.GetComponent<SwapPrefab>().nextPrefab();
+					GameObject.Find("Pano").SetActive(true);
 					break;
 				case TouchEvent.SwipeLeft:
 					artwork.GetComponent<SwapMaterial>().nextMaterial();

@@ -9,8 +9,14 @@ public class Drop : MonoBehaviour
 
 		public void drop()
 		{
-		print ("oops!");
 			this.GetComponent<Rigidbody> ().isKinematic = false;
+			dropped = true;
+		}
+
+		void Update(){
+			if (dropped){
+				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -100, 0);
+			}
 		}
 }
 
