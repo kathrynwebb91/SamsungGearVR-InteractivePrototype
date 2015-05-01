@@ -74,7 +74,7 @@ namespace Demo {
 				GameObject.Find ("Room").GetComponent<Fader> ().FadeIn();
 				faded = false;
 				backToBase = false;
-				state.selected = false;
+				//state.selected = false;
 			}
 		}
 		
