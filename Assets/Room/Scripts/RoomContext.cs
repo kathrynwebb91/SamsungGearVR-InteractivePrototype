@@ -23,7 +23,7 @@ namespace Demo{
 			mediationBinder.Bind<TargetView>().To<TargetMediator>();
 			mediationBinder.Bind<PictureFrameView>().To<PictureFrameMediator>();
 			mediationBinder.Bind<SecretRoomView>().To<SecretRoomMediator>();
-			//mediationBinder.Bind<PortalMenuView>().To<PortalMenuMediator>();
+            mediationBinder.Bind<ProductDisplayView>().To<ProductDisplayMediator>();
 
 			// Managers
 			// bind our interface to a concrete implementation
@@ -37,7 +37,6 @@ namespace Demo{
         {
             base.Launch();
             InputManager inputManager = injectionBinder.GetInstance<InputManager>();
-            //TargetView targetView = injectionBinder.GetInstance<TargetView>();
 
         }
 		

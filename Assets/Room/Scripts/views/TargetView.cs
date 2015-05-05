@@ -37,17 +37,15 @@ public class TargetView : View
 
 			if(state.hit || state.selected)
 			{
-				print (evt.ToString());
-				print (state.hit.ToString() + state.selected.ToString());
 				switch (evt)
 				{
 				case TouchEvent.Tap:
 					if(!state.selected){
 						state.selected = true;
+                        print(this.name + " is selected!");
 					}else{
 						state.selected = false;
 					}
-
 					break;
 				case TouchEvent.SwipeLeft:
 

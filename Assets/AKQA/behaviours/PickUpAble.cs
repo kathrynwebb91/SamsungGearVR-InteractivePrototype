@@ -3,10 +3,11 @@ using System.Collections;
 
 
 /**
- * Applied to objects we'd like to manage the position of at play time for example.
+ * Applied to objects such that they are attatched to the gaze of the user when selected
  * 
  */
 [RequireComponent (typeof (ObjectState))]
+[RequireComponent(typeof(RayInteractions))]
 public class PickUpAble : MonoBehaviour {
 
 
@@ -15,24 +16,11 @@ public class PickUpAble : MonoBehaviour {
 	private Vector3 camForward;
 
 	private ObjectState state;
-    
-	//private bool highlighted;
+    private RayInteractions rayData;
 
 	void Awake(){
 		state =  GetComponent<ObjectState>();
-		setCamera (Camera.main);
-	}
-
-	void updateCameraVals()
-	{
-		camTrans = cam.transform;
-		camForward = cam.transform.forward;
-	}
-
-	void setCamera(Camera camera)
-	{
-		cam = camera;
-		updateCameraVals ();
+        rayData= GetComponent<RayInteractions>();
 	}
 
 	void Update () {
@@ -40,9 +28,7 @@ public class PickUpAble : MonoBehaviour {
 
 			Ray ray;
 
-			updateCameraVals ();
-       
-			ray = new Ray (camTrans.position, camForward);
+            ray = new Ray(rayData.camTrans.position, rayData.camForward);
 
 			Vector3 newpoint = ray.origin + (ray.direction * state.distance);
 			this.transform.position = newpoint;

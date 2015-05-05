@@ -13,23 +13,13 @@ public class RayInteractions : MonoBehaviour {
 
 	private ObjectState	state;
 	private Camera cam;
-	private Transform camTrans;
-	private Vector3 camForward;
+	public Transform camTrans;
+	public Vector3 camForward;
 
 	void Awake(){
 		hit = false;
 		state =  GetComponent<ObjectState>();
 		setCamera (Camera.main);
-	}
-
-	void Start () {
-		
-	}
-
-	void updateCameraVals()
-	{
-		camTrans = cam.transform;
-		camForward = cam.transform.forward;
 	}
 
 	void setCamera(Camera camera)
@@ -38,6 +28,11 @@ public class RayInteractions : MonoBehaviour {
 		updateCameraVals ();
 	}
 
+    void updateCameraVals()
+    {
+        camTrans = cam.transform;
+        camForward = cam.transform.forward;
+    }
 
 	void Update () {
 		RaycastHit rayHit;

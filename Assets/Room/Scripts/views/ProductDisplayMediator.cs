@@ -7,34 +7,32 @@ using strange.extensions.signal.impl;
 using strange.extensions.context.impl;
 
 namespace Demo { 
-    public class PortalMenuMediator : Mediator
+    public class ProductDisplayMediator : Mediator
     {
 
         [Inject]
         public TouchpadInputSignal<TouchEvent> touchInputSignal { get; set; }
 
         [Inject]
-		public PortalMenuView view { get; set; }
+		public ProductDisplayView view { get; set; }
 
 
+	    // Use this for initialization
+        public override void OnRegister()
+        {
+            touchInputSignal.AddListener(InputHandler);
+        }
 
-
-		// Use this for initialization
-		public override void OnRegister()
-		{
-			touchInputSignal.AddListener(InputHandler);
-		}
-		
 		override public void OnRemove()
 		{
 			touchInputSignal.RemoveListener(InputHandler);
 		}
-		
-		
+
+
 		protected void InputHandler(TouchEvent inputType){
-			
+           
 			view.receivedInteraction(inputType);
-		}
+        }
 	
     }
 }

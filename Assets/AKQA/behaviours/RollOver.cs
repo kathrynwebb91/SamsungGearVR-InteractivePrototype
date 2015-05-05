@@ -18,10 +18,6 @@ public class RollOver : MonoBehaviour {
 		scaled = false;
 	}
 
-	void Start () {
-		
-	}
-
 	void Update () {
 		if(state.hit)
 		{

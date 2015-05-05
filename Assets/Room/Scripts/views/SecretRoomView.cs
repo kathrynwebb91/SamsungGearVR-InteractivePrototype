@@ -11,14 +11,15 @@ public class SecretRoomView : View
 {
 
 	public ObjectState     	state;
+    private Roll            roll;
 	private Drop			drop;
 	private ExpandRoom		expander;
-	//private Drop			drop;
 	
 	void Awake()
 	{
 		state = this.GetComponent<ObjectState>();
 		drop = this.GetComponent<Drop>();
+        roll = this.GetComponent<Roll>();
 		expander = GameObject.Find("Wall - 1").GetComponent<ExpandRoom>();
 	}
 	
@@ -35,8 +36,7 @@ public class SecretRoomView : View
 				}
 				break;
 			case TouchEvent.SwipeLeft:
-
-				
+                roll.roll();
 				break;
 			case TouchEvent.SwipeRight:
 				
