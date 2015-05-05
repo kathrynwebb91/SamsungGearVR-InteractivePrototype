@@ -44,6 +44,7 @@ namespace Demo {
 						if(artwork.renderer.material.name == "room (Instance)"){
 							backToBase = true;
 						}else{
+                            backToBase = false;
 							photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.renderer.material);
 							GameObject.Find("Pano").SetActive(true);
 						}
