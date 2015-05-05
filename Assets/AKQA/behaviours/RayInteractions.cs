@@ -10,6 +10,7 @@ using System.Collections;
 public class RayInteractions : MonoBehaviour {
 
 	protected bool hit = false;
+    protected bool anyhit = false;
 
 	private ObjectState	state;
 	private Camera cam;
@@ -18,6 +19,7 @@ public class RayInteractions : MonoBehaviour {
 
 	void Awake(){
 		hit = false;
+        anyhit = false;
 		state =  GetComponent<ObjectState>();
 		setCamera (Camera.main);
 	}
@@ -37,8 +39,25 @@ public class RayInteractions : MonoBehaviour {
 	void Update () {
 		RaycastHit rayHit;
 		Ray ray;
+        RaycastHit[] hits;
 		updateCameraVals ();
-		ray = new Ray (camTrans.position, camForward);
+                
+        hits = Physics.RaycastAll(camTrans.position, camForward, 1000);
+
+        foreach(RaycastHit hit in hits){
+
+            if (hit.collider.gameObject == gameObject)
+            {
+                state.anyhit = true;
+            }
+            else
+            {
+                state.anyhit = false;
+            }
+
+        }
+
+        ray = new Ray(camTrans.position, camForward);
 
 		if (Physics.Raycast(ray, out rayHit ,1000)) {
 			if(rayHit.collider.gameObject == gameObject)

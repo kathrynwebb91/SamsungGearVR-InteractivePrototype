@@ -20,6 +20,10 @@ public class ObjectState : MonoBehaviour
      **/
 	[HideInInspector]
 	public bool hit = false;
+
+    //Trigegrs if object is in the line of sight, not just the first collided
+    [HideInInspector]
+    public bool anyhit = false;
 	
 	[HideInInspector]
 	public bool selected = false;

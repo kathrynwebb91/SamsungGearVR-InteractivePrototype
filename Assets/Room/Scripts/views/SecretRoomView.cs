@@ -20,7 +20,7 @@ public class SecretRoomView : View
 		state = this.GetComponent<ObjectState>();
 		drop = this.GetComponent<Drop>();
         roll = this.GetComponent<Roll>();
-		expander = GameObject.Find("Wall - 1").GetComponent<ExpandRoom>();
+		expander = GameObject.Find("SecretRoom Wall").GetComponent<ExpandRoom>();
 	}
 	
 	public void receivedInteraction(TouchEvent evt)
@@ -36,14 +36,13 @@ public class SecretRoomView : View
 				}
 				break;
 			case TouchEvent.SwipeLeft:
-                roll.roll();
+                roll.roll(new Vector3(0, 100, 0));
 				break;
 			case TouchEvent.SwipeRight:
-				
-
+                roll.roll(new Vector3(100, 0, 0));
 				break;
 			case TouchEvent.SwipeUp:
-
+                roll.roll(new Vector3(0, 0, 100));
 				break;
 			case TouchEvent.SwipeDown:
 

@@ -14,7 +14,7 @@ namespace Demo {
         private bool        fading = false;
         private bool        faded = true;
         private bool        infoOnShow = false;
-        private bool        objectRolledOver = true;
+        private bool        objectChosen = true;
 
 		private ObjectState state;
 
@@ -87,28 +87,31 @@ namespace Demo {
 
             for (int i = 0; i < products.Length; i++)
             {
-                objectRolledOver = false;
-                if (products[i].GetComponent<ObjectState>().hit)
+
+                objectChosen = false;
+                if (products[i].GetComponent<ObjectState>().hit || products[i].GetComponent<ObjectState>().selected)
                 {
-                    currentIndex = i;
-                    objectRolledOver = true;
+                    //currentIndex = i;
+                    objectChosen = true;
                 }
 
-                if (objectRolledOver && !infoOnShow && !fading)
+            }
+                if (objectChosen && !infoOnShow)
                 {
                     print("Toggle On");
                     ToggleInfo(productInfo[currentIndex]);
                     infoOnShow = true;
 
                 }
-                else if (!objectRolledOver && infoOnShow && !fading)
+                
+                if (!objectChosen && infoOnShow)
                 {
                     print("Toggle Off");
                     ToggleInfo(productInfo[currentIndex]);
                     infoOnShow = false;
 
                 }
-            }
+            
 		}
 		
 

@@ -3,11 +3,16 @@ using System.Collections;
 
 public class Roll : MonoBehaviour
 {
+    public float force;
 
-		public void roll()
+        void Awake()
+        {
+            force = 10;
+        }
+
+		public void roll(Vector3 direction)
 		{
-            print(" Keep rollin rollin rollin WHAT!");
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0,10,0));
+            this.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 		}
 
 		void Update(){
