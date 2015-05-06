@@ -91,7 +91,7 @@ namespace Demo {
                 objectChosen = false;
                 if (products[i].GetComponent<ObjectState>().hit || products[i].GetComponent<ObjectState>().selected)
                 {
-                    //currentIndex = i;
+                    currentIndex = i;
                     objectChosen = true;
                 }
 

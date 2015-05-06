@@ -48,6 +48,7 @@ public class RayInteractions : MonoBehaviour {
 
             if (hit.collider.gameObject == gameObject)
             {
+                print(this.name + "is in anyhit");
                 state.anyhit = true;
             }
             else

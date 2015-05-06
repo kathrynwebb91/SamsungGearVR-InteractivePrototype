@@ -4,8 +4,19 @@ using System.Collections;
 public class ExpandRoom : MonoBehaviour
 {
 
-	void Awake ()
+    Flicker[] flickers;
+    GameObject[] lights;
+
+    void Awake ()
 	{
+        lights = new GameObject[3];
+        lights[0] = GameObject.Find("Spotlight1");
+        lights[1] = GameObject.Find("Spotlight2");
+        lights[2] = GameObject.Find("Spotlight3");
+        flickers = new Flicker[3];
+        flickers[0] = lights[0].GetComponent<Flicker>();
+        flickers[1] = lights[1].GetComponent<Flicker>();
+        flickers[2] = lights[2].GetComponent<Flicker>();
 		switchOffLights ();
 	}
 
@@ -30,30 +41,41 @@ public class ExpandRoom : MonoBehaviour
 			iTween.MoveAdd(focus, new Vector3(0,0,-200), 3.0F);
 		}
 
-		switchOnLightsWithDelays ();
+        switchOnLightsWithDelays();
+
 	}
 
-	void switchOnLightsWithDelays(){
+	public void switchOnLightsWithDelays(){
 		StartCoroutine (delayedLightsOn());
 	}
 
 	IEnumerator delayedLightsOn(){
+
+        flickers[0].ToggleFlicker = true;
 		yield return new WaitForSeconds(0.3F);
-		switchOnLight(1);
+		switchOnLight(0);
+        flickers[1].ToggleFlicker = true;
+		yield return new WaitForSeconds(0.6F);
+		switchOnLight (1);
+        flickers[2].ToggleFlicker = true;
 		yield return new WaitForSeconds(0.6F);
 		switchOnLight (2);
-		yield return new WaitForSeconds(0.6F);
-		switchOnLight (3);
+        yield return new WaitForSeconds(1.0F);
+        flickers[0].ToggleFlicker = false;
+        yield return new WaitForSeconds(0.6F);
+        flickers[1].ToggleFlicker = false;
+        yield return new WaitForSeconds(0.6F);
+        flickers[2].ToggleFlicker = false;
 	}
 
-	 void switchOnLight(int lightnum){
-		GameObject.Find ("Spotlight" + lightnum).GetComponent<Light> ().intensity = 3.6F;
+	void switchOnLight(int lightnum){
+	    lights[lightnum].GetComponent<Light> ().intensity = 3.6F;
 	}
 
 	void switchOffLights(){
-		GameObject.Find ("Spotlight1").GetComponent<Light> ().intensity = 0;
-		GameObject.Find ("Spotlight2").GetComponent<Light> ().intensity = 0;
-		GameObject.Find ("Spotlight3").GetComponent<Light> ().intensity = 0;
+        foreach(GameObject spot in lights){
+            spot.GetComponent<Light>().intensity = 0;
+        }
 	}
 
 }

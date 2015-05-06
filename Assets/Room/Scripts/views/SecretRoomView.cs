@@ -20,7 +20,7 @@ public class SecretRoomView : View
 		state = this.GetComponent<ObjectState>();
 		drop = this.GetComponent<Drop>();
         roll = this.GetComponent<Roll>();
-		expander = GameObject.Find("SecretRoom Wall").GetComponent<ExpandRoom>();
+        expander = (ExpandRoom)FindObjectOfType(typeof(ExpandRoom));
 	}
 	
 	public void receivedInteraction(TouchEvent evt)
