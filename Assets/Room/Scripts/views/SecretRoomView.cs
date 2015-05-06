@@ -14,6 +14,7 @@ public class SecretRoomView : View
     private Roll            roll;
 	private Drop			drop;
 	private ExpandRoom		expander;
+    public PictureFrameView picFrameView;
 	
 	void Awake()
 	{
@@ -21,6 +22,7 @@ public class SecretRoomView : View
 		drop = this.GetComponent<Drop>();
         roll = this.GetComponent<Roll>();
         expander = (ExpandRoom)FindObjectOfType(typeof(ExpandRoom));
+        picFrameView = (PictureFrameView)FindObjectOfType(typeof(PictureFrameView));
 	}
 	
 	public void receivedInteraction(TouchEvent evt)
@@ -32,7 +34,10 @@ public class SecretRoomView : View
 			case TouchEvent.Tap:
 				if(!drop.dropped){
 					drop.drop();
+                    //Hide photosphere if there is one
+                    picFrameView.photosphere.GetComponent<Fader>().FadeOut();
 					expander.pushWall();
+                    expander.switchOnLightsWithDelays();
 				}
 				break;
 			case TouchEvent.SwipeLeft:

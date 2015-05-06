@@ -21,12 +21,8 @@ public class ExpandRoom : MonoBehaviour
 	}
 
 	public void pushWall(){
-		//Hide photosphere if there is one
-		if (GameObject.Find ("Pano")) {
-			GameObject.Find ("Pano").SetActive (false);
-		}
 
-		//Moves target wall
+        //Moves target wall
 		iTween.MoveBy(this.gameObject, iTween.Hash (
 			"y",-400,
 			"time",3.0F
@@ -35,15 +31,20 @@ public class ExpandRoom : MonoBehaviour
 
 		//Expands rest of the room
 		int nextIndex = transform.GetSiblingIndex ();
-		for (int i = 0; i<4; i++) {
-			GameObject focus = this.transform.parent.GetChild(nextIndex + i + 1).gameObject;
-			iTween.ScaleAdd(focus, new Vector3(0,0,400), 3.0F);
-			iTween.MoveAdd(focus, new Vector3(0,0,-200), 3.0F);
-		}
-
-        switchOnLightsWithDelays();
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject focus = this.transform.parent.GetChild(nextIndex + i + 1).gameObject;
+            iTween.ScaleAdd(focus, new Vector3(0, 0, 400), 3.0F);
+            iTween.MoveAdd(focus, new Vector3(0, 0, -200), 3.0F);
+        }
 
 	}
+
+    /*
+     * 
+     * Functions to switch lights on/off in the extended room
+     *
+     */
 
 	public void switchOnLightsWithDelays(){
 		StartCoroutine (delayedLightsOn());

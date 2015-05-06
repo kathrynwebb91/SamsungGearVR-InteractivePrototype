@@ -192,7 +192,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 748049}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: d14cc37cc18ec9c459c492f6b289ca5d, type: 3}
   m_PlayOnAwake: 0
@@ -392,7 +392,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
@@ -1356,6 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 0}
+  picFrameView: {fileID: 0}
 --- !u!114 &264931821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4632,7 +4633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1022438719
 Transform:
   m_ObjectHideFlags: 0
@@ -5016,6 +5017,7 @@ GameObject:
   - 135: {fileID: 1127433106}
   - 23: {fileID: 1127433105}
   - 114: {fileID: 1127433109}
+  - 114: {fileID: 1127433110}
   m_Layer: 0
   m_Name: Sphere360
   m_TagString: Untagged
@@ -5091,6 +5093,17 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f50496020c6ce9147bc577cb40c67f0d, type: 2}
   - {fileID: 2100000, guid: bc704e8c9be82ad478be003096ba8b9d, type: 2}
   - {fileID: 2100000, guid: c72a8e7b671fde748a8eb2d88ca4c416, type: 2}
+--- !u!114 &1127433110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1127433104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02304245db431244c8dbdf32e7425bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1150124770
 GameObject:
   m_ObjectHideFlags: 0
@@ -9115,7 +9128,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 146348, guid: b04796c6c2b664f37bfce89a04942fab, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11445116, guid: b04796c6c2b664f37bfce89a04942fab, type: 2}
       propertyPath: m_Enabled
@@ -9145,7 +9158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1861443408
 Transform:
   m_ObjectHideFlags: 0
@@ -9320,7 +9333,6 @@ GameObject:
   - 114: {fileID: 1909024319}
   - 114: {fileID: 1909024318}
   - 65: {fileID: 1909024321}
-  - 114: {fileID: 1909024322}
   - 114: {fileID: 1909024320}
   m_Layer: 0
   m_Name: PictureFrame
@@ -9389,7 +9401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3605b7a4684c4409286eed7593446c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faded: 0
+  photosphere: {fileID: 0}
+  roomFaded: 0
   backToBase: 0
 --- !u!65 &1909024321
 BoxCollider:
@@ -9404,17 +9417,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 80, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1909024322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1909024316}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60066f43ce086a940aa85efb55e80fb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1916277899
 Prefab:
   m_ObjectHideFlags: 0

@@ -11,10 +11,10 @@ namespace Demo {
 		private ChangeColour frameColour;
 		private GameObject frame;
 		private GameObject artwork;
-		private GameObject photosphere;
+		public GameObject photosphere;
 
 		private ObjectState state;
-		public bool			faded;
+		public bool			roomFaded;
 		public bool			backToBase;
 
 		override protected void Awake()
@@ -27,7 +27,7 @@ namespace Demo {
 			photosphere = GameObject.Find("Sphere360");
 
 			photosphere.GetComponent<SwapMaterial> ().UpdateImage ();
-			faded = false;
+			roomFaded = false;
 			backToBase = false;
 		}
 
@@ -46,7 +46,6 @@ namespace Demo {
 						}else{
                             backToBase = false;
 							photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.renderer.material);
-							GameObject.Find("Pano").SetActive(true);
 						}
 
 						state.selected = true;
@@ -67,13 +66,15 @@ namespace Demo {
 		}
 
 		void Update(){
-			if (state.selected && !faded && !backToBase) {
+			if (state.selected && !roomFaded && !backToBase) {
 				GameObject.Find ("Room").GetComponent<Fader> ().FadeOut ();
-				faded = true;
+                photosphere.GetComponent<Fader>().FadeIn();
+				roomFaded = true;
 			}
-			if (backToBase && faded) {
+			if (backToBase && roomFaded) {
 				GameObject.Find ("Room").GetComponent<Fader> ().FadeIn();
-				faded = false;
+                photosphere.GetComponent<Fader>().FadeOut();
+				roomFaded = false;
 				backToBase = false;
 				state.selected = false;
 			}
