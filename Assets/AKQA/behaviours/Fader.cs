@@ -31,6 +31,8 @@ public class Fader : MonoBehaviour
 
 		public void FadeOut(){
 
+            print("Fading out " + this.name);
+
 			if (this.renderer) {
 				Hashtable hash = new Hashtable ();
 				hash.Add ("from", 1);
@@ -51,6 +53,8 @@ public class Fader : MonoBehaviour
 
 		public void FadeIn(){
 
+            print("Fading in " + this.name);
+
 			if (this.renderer) {
 				Hashtable hash = new Hashtable ();
 				hash.Add ("from", 0);
@@ -68,6 +72,31 @@ public class Fader : MonoBehaviour
 				}
 			}
 		}
+
+        public void Fade(float time, float startAlpha, float endAlpha)
+        {
+
+            if (this.renderer)
+            {
+                Hashtable hash = new Hashtable();
+                hash.Add("from", startAlpha);
+                hash.Add("to", endAlpha);
+                hash.Add("time", time);
+                hash.Add("onupdate", "updateAlpha");
+                iTween.ValueTo(gameObject, hash);
+            }
+
+            if (transform.childCount > 0)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).GetComponent<Fader>())
+                    {
+                        transform.GetChild(i).GetComponent<Fader>().Fade(time, startAlpha, endAlpha);
+                    }
+                }
+            }
+        }
 
 }
 

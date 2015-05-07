@@ -23,6 +23,9 @@ public class SecretRoomView : View
         roll = this.GetComponent<Roll>();
         expander = (ExpandRoom)FindObjectOfType(typeof(ExpandRoom));
         picFrameView = (PictureFrameView)FindObjectOfType(typeof(PictureFrameView));
+
+        //GameObject.Find("Room").GetComponent<Fader>().FadeIn();
+
 	}
 	
 	public void receivedInteraction(TouchEvent evt)
@@ -35,7 +38,8 @@ public class SecretRoomView : View
 				if(!drop.dropped){
 					drop.drop();
                     //Hide photosphere if there is one
-                    picFrameView.photosphere.GetComponent<Fader>().FadeOut();
+                    picFrameView.photosphere.SetActive(false);
+                    //picFrameView.photosphere.GetComponent<Fader>().FadeOut();
 					expander.pushWall();
                     expander.switchOnLightsWithDelays();
 				}

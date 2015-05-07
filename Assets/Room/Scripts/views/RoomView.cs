@@ -9,6 +9,7 @@ namespace Demo {
 		
 		void Awake() {
 			this.context = new RoomContext(this);
+
 		}
 
 	}
