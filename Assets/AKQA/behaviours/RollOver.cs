@@ -11,16 +11,16 @@ public class RollOver : MonoBehaviour {
 
     private ObjectState state;
 	private bool        scaled;
-    //public AudioClip    clickSound;
-    //private AudioSource source;
+    public AudioClip    clickSound;
+    private AudioSource source;
 
 	void Awake(){
 		state =  GetComponentInParent<ObjectState>();
 		scaled = false;
-        //source = gameObject.AddComponent("AudioSource") as AudioSource;
-        //clickSound = Resources.Load("Click") as AudioClip;
-        //source.volume = 5;
-        //source.clip = clickSound;
+        source = gameObject.AddComponent("AudioSource") as AudioSource;
+        clickSound = Resources.Load("Audio/Click") as AudioClip;
+        source.volume = 10;
+        source.clip = clickSound;
 	}
 
 	void Update () {
@@ -28,7 +28,7 @@ public class RollOver : MonoBehaviour {
 		{
             if (!scaled)
             {
-                //source.Play();
+                source.Play();
                 iTween.ScaleTo(gameObject, 1.5F * state.origScale, 0.4f);
                 scaled = true;
             }
