@@ -30,7 +30,7 @@ namespace Demo {
             currentIndex = 0;
             currentDispInfo = productInfo[currentIndex].GetComponent<InfoBoxDisplayer>();
 
-            //HideAllInfo();
+            HideAllInfo();
 
 		}
 
@@ -38,7 +38,7 @@ namespace Demo {
         {
             foreach (GameObject infoBox in productInfo)
             {
-                infoBox.GetComponent<Fader>().setAlpha(0.5F);
+                infoBox.GetComponent<Fader>().Fade(0.01F,infoBox.GetComponent<InfoBoxDisplayer>().originalBGAlpha, 0);
             }
         }
 

@@ -8,9 +8,9 @@ public class InfoBoxDisplayer : MonoBehaviour
     public bool selected;
     public bool infoOnShow;
 
-    private Vector3     originalPos;
-    private float       originalBGAlpha;
-    private bool        fading;
+    public Vector3     originalPos;
+    public float       originalBGAlpha;
+    private bool       fading;
 
     void Awake()
     {
