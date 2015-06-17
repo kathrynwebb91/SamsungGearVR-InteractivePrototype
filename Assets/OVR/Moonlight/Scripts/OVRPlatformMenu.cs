@@ -191,7 +191,7 @@ public class OVRPlatformMenu : MonoBehaviour
 			cursorTimerMaterial.SetFloat ( "_Cutoff", alphaAmount );
 
 			// Draw timer at fixed distance in front of camera
-			OVRPose pose = OVRManager.display.GetHeadPose();
+			OVRPose pose = OVRManager.display.GetHeadPose(0f);
 			// cursor positions itself based on camera forward and draws at a fixed depth
 			Vector3 cameraForward = pose.orientation * Vector3.forward;
 			instantiatedCursorTimer.transform.position = pose.position + (cameraForward * fixedDepth);

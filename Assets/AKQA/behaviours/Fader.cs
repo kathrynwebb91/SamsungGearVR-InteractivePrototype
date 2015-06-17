@@ -6,9 +6,9 @@ public class Fader : MonoBehaviour
 
         public void setAlpha(float val)
         {
-            if (this.renderer)
+            if (this.GetComponent<Renderer>())
             {
-                this.renderer.material.SetColor("_Color", new Color(val, val, val, val));
+                this.GetComponent<Renderer>().material.SetColor("_Color", new Color(val, val, val, val));
             }
 
             if (transform.childCount > 0)
@@ -25,15 +25,15 @@ public class Fader : MonoBehaviour
 	
 		void updateAlpha(float val)
 		{
-            Color currentColor = this.renderer.material.color;
-            this.renderer.material.SetColor("_Color", new Color(currentColor.r, currentColor.g, currentColor.b, val));
+            Color currentColor = this.GetComponent<Renderer>().material.color;
+            this.GetComponent<Renderer>().material.SetColor("_Color", new Color(currentColor.r, currentColor.g, currentColor.b, val));
 		}
 
 		public void FadeOut(){
 
             print("Fading out " + this.name);
 
-			if (this.renderer) {
+			if (this.GetComponent<Renderer>()) {
 				Hashtable hash = new Hashtable ();
 				hash.Add ("from", 1);
 				hash.Add ("to", 0);
@@ -55,7 +55,7 @@ public class Fader : MonoBehaviour
 
             print("Fading in " + this.name);
 
-			if (this.renderer) {
+			if (this.GetComponent<Renderer>()) {
 				Hashtable hash = new Hashtable ();
 				hash.Add ("from", 0);
 				hash.Add ("to", 1);
@@ -76,7 +76,7 @@ public class Fader : MonoBehaviour
         public void Fade(float time, float startAlpha, float endAlpha)
         {
 
-            if (this.renderer)
+            if (this.GetComponent<Renderer>())
             {
                 Hashtable hash = new Hashtable();
                 hash.Add("from", startAlpha);

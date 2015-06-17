@@ -12,7 +12,7 @@ public class SwapMaterial : MonoBehaviour
 
 	public void UpdateImage(){
 		isChanging = true;
-		this.renderer.sharedMaterial = materialNames[materialIndex];
+		this.GetComponent<Renderer>().sharedMaterial = materialNames[materialIndex];
 		isChanging = false;
 	}
 
@@ -23,7 +23,7 @@ public class SwapMaterial : MonoBehaviour
 
 	public void setMaterial(Material mat)
 	{
-		this.renderer.sharedMaterial = mat;
+		this.GetComponent<Renderer>().sharedMaterial = mat;
 	}
 
 	public void nextMaterial()

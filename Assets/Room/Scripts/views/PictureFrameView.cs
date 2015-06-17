@@ -48,11 +48,11 @@ namespace Demo {
                         }
 
 						frameColour.setColour(Color.cyan);
-						if(artwork.renderer.material.name == "room (Instance)"){
+						if(artwork.GetComponent<Renderer>().material.name == "room (Instance)"){
 							backToBase = true;
 						}else{
                             backToBase = false;
-							photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.renderer.material);
+							photosphere.GetComponent<SwapMaterial> ().setMaterial(artwork.GetComponent<Renderer>().material);
 						}
 
 						state.selected = true;

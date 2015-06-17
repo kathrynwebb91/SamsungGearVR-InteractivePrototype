@@ -17,7 +17,7 @@ public class TetrisBlockState : MonoBehaviour
 		void OnTriggerEnter(Collider collisionInfo)
 		{
 			print("a collision!");
-			print("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
+			print("Detected collision between " + gameObject.name + " and " + collisionInfo.GetComponent<Collider>().name);
 			
 		}
 

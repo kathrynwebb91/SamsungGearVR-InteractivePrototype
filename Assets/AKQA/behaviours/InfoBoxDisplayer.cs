@@ -19,7 +19,7 @@ public class InfoBoxDisplayer : MonoBehaviour
         infoOnShow = false;
         fading = false;
         originalPos = this.transform.position;
-        originalBGAlpha = this.transform.GetChild(0).renderer.material.color.a;
+        originalBGAlpha = this.transform.GetChild(0).GetComponent<Renderer>().material.color.a;
     }
 
 

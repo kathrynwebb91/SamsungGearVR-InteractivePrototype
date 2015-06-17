@@ -27,7 +27,7 @@ public class Flicker : MonoBehaviour
         }
         else
         {
-            this.light.enabled = true;
+            this.GetComponent<Light>().enabled = true;
             soundPlayed = false;
         }
 
@@ -41,9 +41,9 @@ public class Flicker : MonoBehaviour
             soundPlayed = true;
         }
 
-        this.light.enabled = true;
+        this.GetComponent<Light>().enabled = true;
         yield return new WaitForSeconds (Random.Range(minFlickerSpeed, maxFlickerSpeed ));
-        this.light.enabled = false;
+        this.GetComponent<Light>().enabled = false;
         yield return new WaitForSeconds (Random.Range(minFlickerSpeed, maxFlickerSpeed ));
     }
     	

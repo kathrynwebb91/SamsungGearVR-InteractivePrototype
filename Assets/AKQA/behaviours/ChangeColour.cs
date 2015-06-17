@@ -13,25 +13,25 @@ public class ChangeColour : MonoBehaviour {
 
 	void Awake(){
 		isChanging = false;
-		if (this.renderer) {
-			currentColor = this.renderer.material.color;
+		if (this.GetComponent<Renderer>()) {
+			currentColor = this.GetComponent<Renderer>().material.color;
 		}
 	}
 
 	void Update(){
 
-		if (this.renderer) {
+		if (this.GetComponent<Renderer>()) {
 
 			if (isChanging) {
 				print (this.name + " is changing!");
 				print (newColor.ToString () + " is the new color");
-				this.renderer.material.color = Color.Lerp (currentColor, newColor, t);
+				this.GetComponent<Renderer>().material.color = Color.Lerp (currentColor, newColor, t);
 			}
 			if (t < 1) { // while t below the end limit...
 				// increment it at the desired rate every update:
 				t += Time.deltaTime / duration;
 			} 
-			if (this.renderer.material.color == newColor) {
+			if (this.GetComponent<Renderer>().material.color == newColor) {
 				isChanging = false;
 			}
 
@@ -41,7 +41,7 @@ public class ChangeColour : MonoBehaviour {
 				if(transform.GetChild(i).GetComponent<ChangeColour>()){
 					if(isChanging){
 						//transform.GetChild(i).GetComponent<ChangeColour>().setColour(newColor);
-						transform.GetChild(i).renderer.material.color = Color.Lerp (currentColor, newColor, t);
+						transform.GetChild(i).GetComponent<Renderer>().material.color = Color.Lerp (currentColor, newColor, t);
 						newColor = palette[paletteIndex];
 						isChanging = true;
 					}
@@ -49,7 +49,7 @@ public class ChangeColour : MonoBehaviour {
 						// increment it at the desired rate every update:
 						t += Time.deltaTime / duration;
 					} 
-					if (transform.GetChild(i).renderer.material.color == newColor) {
+					if (transform.GetChild(i).GetComponent<Renderer>().material.color == newColor) {
 						isChanging = false;
 					}
 				}
@@ -61,8 +61,8 @@ public class ChangeColour : MonoBehaviour {
 	
 	public void UpdateColor(){
 
-		if (this.renderer) {
-			currentColor = this.renderer.material.color;
+		if (this.GetComponent<Renderer>()) {
+			currentColor = this.GetComponent<Renderer>().material.color;
 			newColor = palette[paletteIndex];
 			print (currentColor.ToString() + " is the current color");
 			print (newColor.ToString() + " is the new color");
@@ -72,7 +72,7 @@ public class ChangeColour : MonoBehaviour {
 			for (int i=0; i<transform.childCount; i++) {
 				if(transform.GetChild(i).GetComponent<ChangeColour>()){
 					//transform.GetChild(i).GetComponent<ChangeColour>().setColour(newColor);
-					currentColor = transform.GetChild(i).renderer.material.color;
+					currentColor = transform.GetChild(i).GetComponent<Renderer>().material.color;
 					newColor = palette[paletteIndex];
 					print (currentColor.ToString() + " is the current color");
 					print (newColor.ToString() + " is the new color");
@@ -86,8 +86,8 @@ public class ChangeColour : MonoBehaviour {
 	public void setColour(Color color)
 	{
 
-		if (this.renderer) {
-			currentColor = this.renderer.material.color;
+		if (this.GetComponent<Renderer>()) {
+			currentColor = this.GetComponent<Renderer>().material.color;
 			newColor = color;
 			isChanging = true;
 		}

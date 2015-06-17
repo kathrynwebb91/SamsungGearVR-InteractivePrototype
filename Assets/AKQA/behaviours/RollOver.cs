@@ -17,7 +17,7 @@ public class RollOver : MonoBehaviour {
 	void Awake(){
 		state =  GetComponentInParent<ObjectState>();
 		scaled = false;
-        source = gameObject.AddComponent("AudioSource") as AudioSource;
+        source = gameObject.AddComponent<AudioSource>() as AudioSource;
         clickSound = Resources.Load("Audio/Click") as AudioClip;
         source.volume = 10;
         source.clip = clickSound;
